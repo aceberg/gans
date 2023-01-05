@@ -26,3 +26,7 @@ go-build:
 
 docker-build:
 	docker build -t $(DUSER)/$(PKG_NAME) .
+
+cli-run:
+	cd cmd/gans-cli/ && \
+	go run .
