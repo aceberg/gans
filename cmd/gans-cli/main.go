@@ -1,17 +1,17 @@
 package main
 
 import (
-	"log"
+	// "log"
 
 	// "github.com/aceberg/gans/internal/ansible"
-	"github.com/aceberg/gans/internal/check"
-	"github.com/aceberg/gans/internal/git"
+	// "github.com/aceberg/gans/internal/check"
+	"github.com/aceberg/gans/internal/cli"
 )
 
 func main() {
-	repo := "/home/data/repo/01-cloned/testrepo"
-	play := "playbook.yaml"
-	inv := "inventory"
+	// repo := "/home/data/repo/01-cloned/testrepo"
+	// play := "playbook.yaml"
+	// inv := "inventory"
 	// host := "bf"
 
 	// hosts, groups := ansible.ParseInventory(repo + "/" + inv)
@@ -24,14 +24,16 @@ func main() {
 
 	// log.Println("OUTPUT:", out)
 
-	head := git.Head(repo)
+	// head := git.Head(repo)
 
-	log.Println("HEAD:", head)
+	// log.Println("HEAD:", head)
 
-	log.Println("PLAY:", check.IsYaml(repo+"/"+play))
-	log.Println("INV:", check.IsYaml(repo+"/"+inv))
-	log.Println("REPO:", check.IsYaml(repo))
+	// log.Println("PLAY:", check.IsYaml(repo+"/"+play))
+	// log.Println("INV:", check.IsYaml(repo+"/"+inv))
+	// log.Println("REPO:", check.IsYaml(repo))
 
-	files := git.ChangedFiles(repo, "9fc2add")
-	log.Println("FILES:", files)
+	// files := git.ChangedFiles(repo, "9fc2add")
+	// log.Println("FILES:", files)
+
+	cli.Start("/data/gans/repos.yaml")
 }

@@ -24,13 +24,13 @@ func Read(path string) []models.Repo {
 }
 
 // Write - write []struct to  .yaml file
-// func Write(path string, allRepos []models.Repo) {
+func Write(path string, allRepos []models.Repo) {
 
-// 	yamlData, err := yaml.Marshal(&allRepos)
-// 	check.IfError(err)
+	yamlData, err := yaml.Marshal(&allRepos)
+	check.IfError(err)
 
-// 	err = os.WriteFile(path, yamlData, 0644)
-// 	check.IfError(err)
+	err = os.WriteFile(path, yamlData, 0644)
+	check.IfError(err)
 
-// 	log.Println("INFO: writing new repos file to", path, "\n", string(yamlData))
-// }
+	// log.Println("INFO: writing new repos file to", path, "\n", string(yamlData))
+}

@@ -9,10 +9,12 @@ type Conf struct {
 
 // Repo - git repository
 type Repo struct {
-	Name    string `yaml:"name"`
-	Path    string `yaml:"path"`
-	Timeout string `yaml:"timeout"`
-	Hosts	[]string `yaml:"hosts"`
+	Name    string   `yaml:"name"`
+	Path    string   `yaml:"path"`
+	Head    string   `yaml:"head"`
+	Inv     string   `yaml:"inventory"`
+	Timeout string   `yaml:"timeout"`
+	Hosts   []string `yaml:"hosts"`
 }
 
 // GuiData - web gui data

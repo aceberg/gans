@@ -3,6 +3,7 @@ package cli
 import (
 	"log"
 
+	"github.com/aceberg/gans/internal/play"
 	"github.com/aceberg/gans/internal/yaml"
 )
 
@@ -18,9 +19,8 @@ func Start(yamlPath string) {
 		return
 	}
 
-	quit := make(chan bool)
-	sync.AllRepos(allRepos, quit)
+	// quit := make(chan bool)
+	play.Exec(yamlPath, allRepos)
 
-	select {}
+	// select {}
 }
-
