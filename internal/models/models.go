@@ -12,6 +12,7 @@ type Repo struct {
 	Name    string `yaml:"name"`
 	Path    string `yaml:"path"`
 	Timeout string `yaml:"timeout"`
+	Hosts	[]string `yaml:"hosts"`
 }
 
 // GuiData - web gui data
