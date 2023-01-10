@@ -3,6 +3,7 @@ package cli
 import (
 	"log"
 
+	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/models"
 	"github.com/aceberg/gans/internal/play"
 	"github.com/aceberg/gans/internal/yaml"
@@ -12,16 +13,13 @@ import (
 func Start(conf models.Conf) {
 	log.Println("INFO: starting gans-cli with", conf.YamlPath)
 
-	allRepos := yaml.Read(conf.YamlPath)
-	log.Println("INFO: all repos", allRepos)
+	repo := yaml.Read(conf.YamlPath)
+	log.Println("INFO: repo", repo)
 
-	if allRepos == nil {
-		log.Printf("ERROR: no repos")
-		return
+	if check.IsRepo(repo.Path) {
+		conf.Quit = make(chan bool)
+		play.Exec(conf, repo)
+	} else {
+		log.Println("ERROR: not a git repo", repo.Path)
 	}
-
-	quit := make(chan bool)
-	play.Exec(conf, allRepos, quit)
-
-	// select {}
 }

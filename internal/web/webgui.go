@@ -12,12 +12,11 @@ import (
 // Gui - start web server
 func Gui(confPath, yamlPath string) {
 
-	// AllRepos = allRepos
 	ConfigPath = confPath
 	YamlPath = yamlPath
 
-	AllRepos = yaml.Read(YamlPath)
-	log.Println("INFO: all repos", AllRepos)
+	Repo = yaml.Read(YamlPath)
+	log.Println("INFO: all repos", Repo)
 
 	log.Println("INFO: starting web gui with config", ConfigPath)
 	AppConfig = conf.Get(ConfigPath)

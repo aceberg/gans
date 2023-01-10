@@ -4,6 +4,7 @@ import (
 	// "log"
 	"flag"
 
+	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/cli"
 	"github.com/aceberg/gans/internal/models"
 )
@@ -23,6 +24,8 @@ func main() {
 	conf.DB = *dbPtr
 	conf.YamlPath = *yamlPtr
 	conf.Timeout = *timePtr
+
+	check.Path(conf.DB)
 
 	cli.Start(conf)
 }

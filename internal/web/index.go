@@ -12,7 +12,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	guiData.Config = AppConfig
 	// guiData.Icon = Icon
 
-	guiData.Repos = AllRepos
+	guiData.Repo = Repo
 
 	execTemplate(w, "index", guiData)
 }

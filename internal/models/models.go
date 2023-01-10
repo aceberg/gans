@@ -2,7 +2,7 @@ package models
 
 // Conf - web gui config
 type Conf struct {
-	DB		string
+	DB       string
 	Host     string
 	Port     string
 	Theme    string
@@ -24,6 +24,6 @@ type Repo struct {
 type GuiData struct {
 	Config Conf
 	Icon   string
-	Repos  []Repo
+	Repo   Repo
 	Themes []string
 }

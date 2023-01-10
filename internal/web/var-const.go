@@ -7,8 +7,8 @@ import (
 var (
 	// AppConfig - config for Web Gui
 	AppConfig models.Conf
-	// AllRepos - all repositories
-	AllRepos []models.Repo
+	// Repo - repository
+	Repo models.Repo
 	// ConfigPath - path to Gui config file
 	ConfigPath string
 	// YamlPath - path to repos file
