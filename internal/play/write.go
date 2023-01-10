@@ -5,10 +5,12 @@ import (
 	"github.com/aceberg/gans/internal/yaml"
 )
 
-func writeRepo(path string, repo models.Repo) {
+func writeRepo(conf models.Conf, repo models.Repo, quit chan bool) {
 	var newRepos []models.Repo
 
-	allRepos := yaml.Read(path)
+	close(quit)
+
+	allRepos := yaml.Read(conf.YamlPath)
 
 	for _, oneRepo := range allRepos {
 		if oneRepo.Path == repo.Path {
@@ -17,5 +19,8 @@ func writeRepo(path string, repo models.Repo) {
 		newRepos = append(newRepos, oneRepo)
 	}
 
-	yaml.Write(path, newRepos)
+	yaml.Write(conf.YamlPath, newRepos)
+
+	quit = make(chan bool)
+	Exec(conf, newRepos, quit)
 }

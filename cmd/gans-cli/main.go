@@ -2,38 +2,27 @@ package main
 
 import (
 	// "log"
+	"flag"
 
-	// "github.com/aceberg/gans/internal/ansible"
-	// "github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/cli"
+	"github.com/aceberg/gans/internal/models"
 )
 
+const dbPath = "/data/gans/sqlite.db"
+const yamlPath = "/data/gans/repos.yaml"
+const timeout = "5s"
+
 func main() {
-	// repo := "/home/data/repo/01-cloned/testrepo"
-	// play := "playbook.yaml"
-	// inv := "inventory"
-	// host := "bf"
+	var conf models.Conf
 
-	// hosts, groups := ansible.ParseInventory(repo + "/" + inv)
+	dbPtr := flag.String("d", dbPath, "Path to sqlite DB file")
+	yamlPtr := flag.String("r", yamlPath, "Path to repos yaml file")
+	timePtr := flag.String("t", timeout, "Scan for updates timeout (s, m, h)")
+	flag.Parse()
 
-	// log.Println("HOSTS:", hosts)
-	// log.Println("GROUPS:", groups)
+	conf.DB = *dbPtr
+	conf.YamlPath = *yamlPtr
+	conf.Timeout = *timePtr
 
-	// out, err := ansible.Playbook(host, repo+"/"+inv, repo+"/"+play)
-	// check.IfError(err)
-
-	// log.Println("OUTPUT:", out)
-
-	// head := git.Head(repo)
-
-	// log.Println("HEAD:", head)
-
-	// log.Println("PLAY:", check.IsYaml(repo+"/"+play))
-	// log.Println("INV:", check.IsYaml(repo+"/"+inv))
-	// log.Println("REPO:", check.IsYaml(repo))
-
-	// files := git.ChangedFiles(repo, "9fc2add")
-	// log.Println("FILES:", files)
-
-	cli.Start("/data/gans/repos.yaml")
+	cli.Start(conf)
 }

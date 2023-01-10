@@ -2,19 +2,22 @@ package models
 
 // Conf - web gui config
 type Conf struct {
-	Host  string
-	Port  string
-	Theme string
+	DB		string
+	Host     string
+	Port     string
+	Theme    string
+	YamlPath string
+	Timeout  string
+	Quit     chan bool
 }
 
 // Repo - git repository
 type Repo struct {
-	Name    string   `yaml:"name"`
-	Path    string   `yaml:"path"`
-	Head    string   `yaml:"head"`
-	Inv     string   `yaml:"inventory"`
-	Timeout string   `yaml:"timeout"`
-	Hosts   []string `yaml:"hosts"`
+	Name  string   `yaml:"name"`
+	Path  string   `yaml:"path"`
+	Head  string   `yaml:"head"`
+	Inv   string   `yaml:"inventory"`
+	Hosts []string `yaml:"hosts"`
 }
 
 // GuiData - web gui data

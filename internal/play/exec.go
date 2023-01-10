@@ -2,6 +2,8 @@ package play
 
 import (
 	"log"
+	"strconv"
+	"time"
 
 	"github.com/aceberg/gans/internal/ansible"
 	"github.com/aceberg/gans/internal/check"
@@ -10,7 +12,7 @@ import (
 )
 
 // Exec - execute playbooks
-func Exec(path string, allRepos []models.Repo) {
+func Exec(conf models.Conf, allRepos []models.Repo, quit chan bool) {
 	var newRepos []models.Repo
 
 	// All checks here
@@ -22,27 +24,31 @@ func Exec(path string, allRepos []models.Repo) {
 		}
 	}
 
+	tSec, err := check.TimeToSec(conf.Timeout)
+	check.IfError(err)
+
+	tInt, _ := strconv.Atoi(tSec)
+
 	// Endless cycle with timeout
-	// for {
-	for _, repo := range newRepos {
-		play(path, repo)
+	for {
+		for _, repo := range newRepos {
+			play(conf, repo, quit)
+		}
+
+		time.Sleep(time.Duration(tInt) * time.Second)
 	}
-	// }
 }
 
-func play(path string, repo models.Repo) {
+func play(conf models.Conf, repo models.Repo, quit chan bool) {
 
 	head := git.Head(repo.Path)
 	head = head[0:7]
 
-	log.Println("HEAD:", head, ".")
-	log.Println("REPO HEAD:", repo.Head, ".")
-
 	if head != repo.Head {
 		if repo.Head == "" {
+			log.Println("INFO: empty repo head. Writing head", head, "for", repo.Path)
 			repo.Head = head
-			writeRepo(path, repo)
-			log.Println("Empty repo head")
+			writeRepo(conf, repo, quit)
 		} else {
 			files := git.ChangedFiles(repo.Path, repo.Head)
 			log.Println("FILES:", files)
@@ -59,7 +65,7 @@ func play(path string, repo models.Repo) {
 				}
 			}
 			repo.Head = head
-			writeRepo(path, repo)
+			writeRepo(conf, repo, quit)
 		}
 	}
 }
