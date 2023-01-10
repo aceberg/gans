@@ -11,24 +11,30 @@ import (
 )
 
 func play(conf models.Conf, repo models.Repo) {
+	var play models.Play
 
 	head := git.Head(repo.Path)
 	head = head[0:7]
 
 	if head != repo.Head {
 		if repo.Head == "" {
-			log.Println("INFO: empty repo head. Writing head", head, "for", repo.Path)
+			log.Println("INFO: empty repo head. Writing head", head)
 			repo.Head = head
 			yaml.Write(conf.YamlPath, repo)
 		} else {
 			files := git.ChangedFiles(repo.Path, repo.Head)
 			log.Println("INFO: changed files", files)
 
-			for _, host := range repo.Hosts {
-				for _, file := range files {
-					if check.IsYaml(repo.Path + "/" + file) {
+			play.Head = head
+			play.Inv = repo.Path + "/" + repo.Inv
 
-						ansible.Playbook(host, repo.Path+"/"+repo.Inv, repo.Path+"/"+file)
+			for _, file := range files {
+				play.File = repo.Path + "/" + file
+
+				if check.IsYaml(play.File) && (play.File != play.Inv) {
+					for _, host := range repo.Hosts {
+						play.Host = host
+						ansible.Playbook(conf, play)
 					}
 				}
 			}

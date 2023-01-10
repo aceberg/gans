@@ -12,7 +12,7 @@ import (
 // Exec - execute playbooks
 func Exec(conf models.Conf, repo models.Repo) {
 
-	tSec, err := check.TimeToSec(conf.Timeout)
+	tSec, err := check.TimeToSec(conf.Interval)
 	check.IfError(err)
 
 	tInt, _ := strconv.Atoi(tSec)

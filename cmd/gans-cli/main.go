@@ -6,26 +6,28 @@ import (
 
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/cli"
+	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
 )
 
 const dbPath = "/data/gans/sqlite.db"
 const yamlPath = "/data/gans/repos.yaml"
-const timeout = "5s"
+const interval = "5s"
 
 func main() {
 	var conf models.Conf
 
 	dbPtr := flag.String("d", dbPath, "Path to sqlite DB file")
 	yamlPtr := flag.String("r", yamlPath, "Path to repos yaml file")
-	timePtr := flag.String("t", timeout, "Scan for updates timeout (s, m, h)")
+	timePtr := flag.String("t", interval, "Interval between repo scans (s, m, h)")
 	flag.Parse()
 
 	conf.DB = *dbPtr
 	conf.YamlPath = *yamlPtr
-	conf.Timeout = *timePtr
+	conf.Interval = *timePtr
 
 	check.Path(conf.DB)
+	db.Create(conf.DB)
 
 	cli.Start(conf)
 }

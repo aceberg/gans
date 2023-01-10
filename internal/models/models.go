@@ -7,7 +7,7 @@ type Conf struct {
 	Port     string
 	Theme    string
 	YamlPath string
-	Timeout  string
+	Interval string
 	Quit     chan bool
 }
 
@@ -20,10 +20,22 @@ type Repo struct {
 	Hosts []string `yaml:"hosts"`
 }
 
+// Play - info about ansible-playbook run
+type Play struct {
+	ID    int    `db:"ID"`
+	Host  string `db:"HOST"`
+	File  string `db:"FILE"`
+	Head  string `db:"HEAD"`
+	Inv   string `db:"INV"`
+	Out   string `db:"OUT"`
+	Error string `db:"ERROR"`
+}
+
 // GuiData - web gui data
 type GuiData struct {
 	Config Conf
 	Icon   string
 	Repo   Repo
+	Plays  []Play
 	Themes []string
 }
