@@ -3,6 +3,7 @@
 ## ToDo
 - [ ] Use Repo timeout for playbook repeat
 - [ ] In play.Exec implement Quit before timeout ends
+- [ ] List all files in repo (`git ls-files`)
 
 ## Done
 - [x] Execute Ansible playbook for 1 host

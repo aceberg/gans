@@ -1,11 +1,11 @@
 package web
 
 import (
-	"html"
-	"log"
+	// "html"
+	// "log"
 	"net/http"
 	"strconv"
-	"strings"
+	// "strings"
 
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/models"
@@ -23,7 +23,7 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, play := range Plays {
 		if play.ID == id {
-			play.Out = colorOutput(play.Out)
+			// play.Out = colorOutput(play.Out)
 			guiData.Plays = append(guiData.Plays, play)
 			break
 		}
@@ -32,13 +32,13 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
 	execTemplate(w, "status", guiData)
 }
 
-func colorOutput(str string) string {
-	var out string
+// func colorOutput(str string) string {
+// 	var out string
 
-	out = strings.ReplaceAll(str, "ok", "&lt;b&gt;ok&lt;/b&gt;")
-	out = html.UnescapeString(out)
+// 	out = strings.ReplaceAll(str, "ok", "&lt;b&gt;ok&lt;/b&gt;")
+// 	out = html.UnescapeString(out)
 
-	log.Println("OUT:\n", out)
+// 	log.Println("OUT:\n", out)
 
-	return out
-}
+// 	return out
+// }

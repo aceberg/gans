@@ -14,7 +14,6 @@ type Conf struct {
 
 // Repo - git repository
 type Repo struct {
-	Name  string   `yaml:"name"`
 	Path  string   `yaml:"path"`
 	Head  string   `yaml:"head"`
 	Inv   string   `yaml:"inventory"`
