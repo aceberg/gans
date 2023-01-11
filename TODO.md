@@ -1,7 +1,6 @@
 # Roadmap
 
 ## ToDo
-- [ ] Store results in DB
 - [ ] Use Repo timeout for playbook repeat
 - [ ] In play.Exec implement Quit before timeout ends
 
@@ -14,3 +13,4 @@
 - [x] Check if repo was updated
 - [x] For each playbook and for each host run Ansible
 - [x] Rename conf.Timeout to Interval
+- [x] Store results in DB

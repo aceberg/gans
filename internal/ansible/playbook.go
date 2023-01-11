@@ -1,6 +1,7 @@
 package ansible
 
 import (
+	"fmt"
 	"log"
 	"os/exec"
 
@@ -17,10 +18,14 @@ func Playbook(conf models.Conf, play models.Play) {
 	cmd := exec.Command("ansible-playbook", "-i", play.Inv, "-l", play.Host, play.File)
 
 	out, err := cmd.CombinedOutput()
-	check.IfError(err)
 
 	play.Out = string(out)
-	// play.Error = string(err)
+
+	if check.IfError(err) {
+		play.Error = fmt.Sprintf("%s", err)
+	} else {
+		play.Error = ""
+	}
 
 	db.Insert(conf.DB, play)
 
