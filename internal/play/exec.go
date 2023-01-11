@@ -1,6 +1,7 @@
 package play
 
 import (
+	"log"
 	"strconv"
 	"time"
 
@@ -11,6 +12,11 @@ import (
 
 // Exec - execute playbooks
 func Exec(conf models.Conf, repo models.Repo) {
+
+	if !check.IsRepo(repo.Path) {
+		log.Println("ERROR: not a git repo", repo.Path)
+		return
+	}
 
 	tSec, err := check.TimeToSec(conf.Interval)
 	check.IfError(err)

@@ -10,6 +10,7 @@ import (
 func Create(path string) {
 	sqlStatement := `CREATE TABLE IF NOT EXISTS plays (
 		"ID"		INTEGER PRIMARY KEY,
+		"DATE"		TEXT,
 		"HOST"		TEXT,
 		"FILE"		TEXT,
 		"HEAD"		TEXT,
@@ -22,10 +23,10 @@ func Create(path string) {
 // Insert - insert one play into DB
 func Insert(path string, play models.Play) {
 
-	sqlStatement := `INSERT INTO plays (HOST, FILE, HEAD, OUT, ERROR) 
-	VALUES ('%s','%s','%s','%s','%s');`
+	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, OUT, ERROR) 
+	VALUES ('%s','%s','%s','%s','%s','%s');`
 
-	sqlStatement = fmt.Sprintf(sqlStatement, play.Host, play.File, play.Head, play.Out, play.Error)
+	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Out, play.Error)
 
 	exec(path, sqlStatement)
 }

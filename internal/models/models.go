@@ -6,6 +6,7 @@ type Conf struct {
 	Host     string
 	Port     string
 	Theme    string
+	ConfPath string
 	YamlPath string
 	Interval string
 	Quit     chan bool
@@ -23,6 +24,7 @@ type Repo struct {
 // Play - info about ansible-playbook run
 type Play struct {
 	ID    int    `db:"ID"`
+	Date  string `db:"DATE"`
 	Host  string `db:"HOST"`
 	File  string `db:"FILE"`
 	Head  string `db:"HEAD"`

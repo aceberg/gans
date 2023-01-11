@@ -25,7 +25,7 @@ func Select(path string) []models.Play {
 	dbx, err := sqlx.Connect("sqlite", path)
 	check.IfError(err)
 
-	err = dbx.Select(&playList, "SELECT * FROM plays")
+	err = dbx.Select(&playList, "SELECT * FROM plays ORDER BY ID DESC")
 	check.IfError(err)
 
 	return playList

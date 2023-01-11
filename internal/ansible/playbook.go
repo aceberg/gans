@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strings"
+	"time"
 
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/db"
@@ -26,6 +28,12 @@ func Playbook(conf models.Conf, play models.Play) {
 	} else {
 		play.Error = ""
 	}
+
+	if strings.Contains(play.Out, "skipping: no hosts matched") {
+		play.Error = "Skipped"
+	}
+
+	play.Date = time.Now().Format("2006-01-02 15:04:05")
 
 	db.Insert(conf.DB, play)
 

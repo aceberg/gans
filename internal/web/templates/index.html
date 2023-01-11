@@ -1,7 +1,44 @@
 {{ define "index"}}
 <body>
     <div class="container mt-3">
-        <p>INDEX</p>
+        <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Host</th>
+                <th>File</th>
+                <th>Head</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        {{ range .Plays }}
+            <tr>
+                <td>{{ .Date }}</td>
+                <td>
+                    <a href="/filter?by=host,tag={{ .Host }}">{{ .Host }}</a>
+                </td>
+                <td>{{ .File }}</td>
+                <td>{{ .Head }}</td>
+                {{ if eq .Error "" }}
+                    <td style="background-color: rgb(161, 245, 161)">
+                        <a href="/status?id={{ .ID }}">Ok</a>
+                    </td>
+                {{ else }}
+                    {{ if eq .Error "Skipped" }}
+                    <td style="background-color: rgb(173, 250, 255)">
+                        <a href="/status?id={{ .ID }}">Skipped</a>
+                    </td>
+                    {{ else }}
+                    <td style="background-color: rgb(252, 162, 162)">
+                        <a href="/status?id={{ .ID }}">Failed</a>
+                    </td>
+                    {{ end }}
+                {{ end}}
+                <td>
+                    <a href="/run?id={{ .ID }}">Run</a>
+                </td>
+            </tr>
+        {{ end }}
+        </table>
     </div>
 
 {{ template "footer" }}

@@ -4,19 +4,32 @@ import (
 	"flag"
 
 	"github.com/aceberg/gans/internal/check"
+	"github.com/aceberg/gans/internal/models"
 	"github.com/aceberg/gans/internal/web"
 )
 
 const confPath = "/data/gans/config.yaml"
+const dbPath = "/data/gans/sqlite.db"
 const yamlPath = "/data/gans/repos.yaml"
+const interval = "5s"
 
 func main() {
+	var conf models.Conf
+
+	dbPtr := flag.String("d", dbPath, "Path to sqlite DB file")
 	confPtr := flag.String("c", confPath, "Path to config yaml file")
 	yamlPtr := flag.String("r", yamlPath, "Path to repos yaml file")
+	timePtr := flag.String("t", interval, "Interval between repo scans (s, m, h)")
 	flag.Parse()
 
-	check.Path(*confPtr)
-	check.Path(*yamlPtr)
+	conf.ConfPath = *confPtr
+	conf.DB = *dbPtr
+	conf.YamlPath = *yamlPtr
+	conf.Interval = *timePtr
 
-	web.Gui(*confPtr, *yamlPtr)
+	check.Path(conf.ConfPath)
+	check.Path(conf.DB)
+	check.Path(conf.YamlPath)
+
+	web.Gui(conf)
 }

@@ -6,20 +6,31 @@ import (
 
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/conf"
+	"github.com/aceberg/gans/internal/db"
+	"github.com/aceberg/gans/internal/models"
+	"github.com/aceberg/gans/internal/play"
 	"github.com/aceberg/gans/internal/yaml"
 )
 
 // Gui - start web server
-func Gui(confPath, yamlPath string) {
+func Gui(config models.Conf) {
+	AppConfig = config
 
-	ConfigPath = confPath
-	YamlPath = yamlPath
+	log.Println("INFO: starting web gui with", AppConfig.ConfPath)
 
-	Repo = yaml.Read(YamlPath)
-	log.Println("INFO: all repos", Repo)
+	Repo = yaml.Read(AppConfig.YamlPath)
+	log.Println("INFO: repo", Repo)
 
-	log.Println("INFO: starting web gui with config", ConfigPath)
-	AppConfig = conf.Get(ConfigPath)
+	tmpConfig := conf.Get(AppConfig.ConfPath)
+
+	AppConfig.Host = tmpConfig.Host
+	AppConfig.Port = tmpConfig.Port
+	AppConfig.Theme = tmpConfig.Theme
+
+	db.Create(AppConfig.DB)
+
+	AppConfig.Quit = make(chan bool)
+	go play.Exec(AppConfig, Repo)
 
 	address := AppConfig.Host + ":" + AppConfig.Port
 
