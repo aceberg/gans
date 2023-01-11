@@ -4,7 +4,52 @@
     <div class="container mt-5">
     <div class="row">
     {{ range .Plays }}
-        <p>{{ .Out }}</p>
+    <table class="table table-striped">
+        <tr>
+            <th style="width: 5%;">Del</th>
+            <th style="width: 15%;">Date</th>
+            <th>Host</th>
+            <th>File</th>
+            <th>Head</th>
+            <th>Status</th>
+            <th style="width: 5%;">Run</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="/del?id={{ .ID }}">
+                    <i class="bi bi-x-square"></i>
+                </a>
+            </td>
+            <td>{{ .Date }}</td>
+            <td>
+                <a href="/filter?by=host&tag={{ .Host }}">{{ .Host }}</a>
+            </td>
+            <td>
+                <a href="/filter?by=file&tag={{ .File }}">{{ .File }}</a>
+            </td>
+            <td>
+                <a href="/filter?by=head&tag={{ .Head }}">{{ .Head }}</a>
+            </td>
+            {{ if eq .Error "" }}
+            <td style="background-color: rgb(161, 245, 161)">{{ .Error }}</td>
+            {{ else }}
+                {{ if eq .Error "Skipped" }}
+                <td>{{ .Error }}</td>
+                {{ else }}
+                <td style="background-color: rgb(252, 162, 162)">{{ .Error }}</td>
+                {{ end }}
+            {{ end }}
+            <td>
+                <a href="/run?id={{ .ID }}">
+                    <i class="bi bi-caret-right-square"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <div style="white-space: pre-wrap;">
+        <b>Playbook output:</b>
+        {{ .Out }}
+    </div>
     {{ end }}
     </div>
     </div>

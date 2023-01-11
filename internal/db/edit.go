@@ -14,6 +14,7 @@ func Create(path string) {
 		"HOST"		TEXT,
 		"FILE"		TEXT,
 		"HEAD"		TEXT,
+		"INV"		TEXT,
 		"OUT"		TEXT,
 		"ERROR"		TEXT
 	);`
@@ -23,10 +24,20 @@ func Create(path string) {
 // Insert - insert one play into DB
 func Insert(path string, play models.Play) {
 
-	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, OUT, ERROR) 
-	VALUES ('%s','%s','%s','%s','%s','%s');`
+	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, INV, OUT, ERROR) 
+	VALUES ('%s','%s','%s','%s','%s','%s','%s');`
 
-	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Out, play.Error)
+	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Inv, play.Out, play.Error)
+
+	exec(path, sqlStatement)
+}
+
+// Delete - delete one play
+func Delete(path string, id int) {
+
+	sqlStatement := `DELETE FROM plays WHERE ID='%d';`
+
+	sqlStatement = fmt.Sprintf(sqlStatement, id)
 
 	exec(path, sqlStatement)
 }

@@ -40,8 +40,10 @@ func Gui(config models.Conf) {
 
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/config/", configHandler)
-	// http.HandleFunc("/filter/", filterHandler)
+	http.HandleFunc("/del/", delHandler)
+	http.HandleFunc("/filter/", filterHandler)
 	// http.HandleFunc("/repo/", repoHandler)
+	http.HandleFunc("/run/", runHandler)
 	http.HandleFunc("/save_config/", saveConfigHandler)
 	http.HandleFunc("/status/", statusHandler)
 	err := http.ListenAndServe(address, nil)

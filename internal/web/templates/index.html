@@ -3,6 +3,7 @@
     <div class="container mt-3">
         <table class="table table-striped">
             <tr>
+                <th style="width: 5%;">Del</th>
                 <th style="width: 15%;">Date</th>
                 <th>Host</th>
                 <th>File</th>
@@ -12,12 +13,21 @@
             </tr>
         {{ range .Plays }}
             <tr>
+                <td>
+                    <a href="/del?id={{ .ID }}">
+                        <i class="bi bi-x-square"></i>
+                    </a>
+                </td>
                 <td>{{ .Date }}</td>
                 <td>
-                    <a href="/filter?by=host,tag={{ .Host }}">{{ .Host }}</a>
+                    <a href="/filter?by=host&tag={{ .Host }}">{{ .Host }}</a>
                 </td>
-                <td>{{ .File }}</td>
-                <td>{{ .Head }}</td>
+                <td>
+                    <a href="/filter?by=file&tag={{ .File }}">{{ .File }}</a>
+                </td>
+                <td>
+                    <a href="/filter?by=head&tag={{ .Head }}">{{ .Head }}</a>
+                </td>
                 {{ if eq .Error "" }}
                     <td style="background-color: rgb(161, 245, 161)">
                         <a href="/status?id={{ .ID }}">Ok</a>
