@@ -3,12 +3,12 @@
     <div class="container mt-3">
         <table class="table table-striped">
             <tr>
-                <th>Date</th>
+                <th style="width: 15%;">Date</th>
                 <th>Host</th>
                 <th>File</th>
                 <th>Head</th>
                 <th>Status</th>
-                <th></th>
+                <th style="width: 5%;">Run</th>
             </tr>
         {{ range .Plays }}
             <tr>
@@ -24,7 +24,7 @@
                     </td>
                 {{ else }}
                     {{ if eq .Error "Skipped" }}
-                    <td style="background-color: rgb(173, 250, 255)">
+                    <td>
                         <a href="/status?id={{ .ID }}">Skipped</a>
                     </td>
                     {{ else }}
@@ -34,7 +34,9 @@
                     {{ end }}
                 {{ end}}
                 <td>
-                    <a href="/run?id={{ .ID }}">Run</a>
+                    <a href="/run?id={{ .ID }}">
+                        <i class="bi bi-caret-right-square"></i>
+                    </a>
                 </td>
             </tr>
         {{ end }}

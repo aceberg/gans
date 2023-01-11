@@ -30,15 +30,15 @@ func Get(path string) models.Conf {
 }
 
 // Write - write config to file
-// func Write(path string, config models.Conf) {
+func Write(config models.Conf) {
 
-// 	viper.SetConfigFile(path)
-// 	viper.SetConfigType("yaml")
+	viper.SetConfigFile(config.ConfPath)
+	viper.SetConfigType("yaml")
 
-// 	viper.Set("host", config.Host)
-// 	viper.Set("port", config.Port)
-// 	viper.Set("theme", config.Theme)
+	viper.Set("host", config.Host)
+	viper.Set("port", config.Port)
+	viper.Set("theme", config.Theme)
 
-// 	err := viper.WriteConfig()
-// 	check.IfError(err)
-// }
+	err := viper.WriteConfig()
+	check.IfError(err)
+}

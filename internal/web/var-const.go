@@ -9,6 +9,8 @@ var (
 	AppConfig models.Conf
 	// Repo - repository
 	Repo models.Repo
+	// Plays - play results from DB
+	Plays []models.Play
 )
 
 // TemplPath - path to html templates

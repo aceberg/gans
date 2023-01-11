@@ -1,0 +1,14 @@
+{{ define "status" }}
+
+<body>
+    <div class="container mt-5">
+    <div class="row">
+    {{ range .Plays }}
+        <p>{{ .Out }}</p>
+    {{ end }}
+    </div>
+    </div>
+        
+
+{{ template "footer" }}
+{{ end }}

@@ -13,7 +13,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	guiData.Config = AppConfig
 	guiData.Icon = Icon
 
-	guiData.Plays = db.Select(AppConfig.DB)
+	Plays = db.Select(AppConfig.DB)
+	guiData.Plays = Plays
 
 	execTemplate(w, "index", guiData)
 }
