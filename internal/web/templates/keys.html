@@ -4,7 +4,7 @@
         <table class="table">
             <form action="/new_key/" method="post">
                 <tr>
-                    <td style="width: 20%;">Name</td>
+                    <td style="width: 20%;">File name</td>
                     <td><input name="name" type="text" class="form-control"></td>
                 </tr>
                 <tr>
@@ -18,6 +18,26 @@
             </form>
         </table>
         <table class="table table-striped">
+            <tr>
+                <th>Del</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>File</th>
+            </tr>
+            {{ range .Keys }}
+            <tr>
+                <td>
+                    <a href="/key_del?id={{ .ID }}">
+                        <i class="bi bi-x-square"></i>
+                    </a>
+                </td>
+                <td>{{ .ID }}</td>
+                <td>{{ .Date }}</td>
+                <td>{{ .Name }}</td>
+                <td>{{ .File }}</td>
+            </tr>
+            {{ end}}
         </table>
     </div>
 

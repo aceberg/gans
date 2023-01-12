@@ -24,7 +24,8 @@ func Create(path string) {
 		"ID"		INTEGER PRIMARY KEY,
 		"DATE"		TEXT,
 		"NAME"		TEXT,
-		"KEY"		TEXT
+		"KEY"		TEXT,
+		"FILE"		TEXT
 	);`
 	exec(path, sqlStatement)
 }

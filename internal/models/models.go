@@ -8,6 +8,7 @@ type Conf struct {
 	Theme    string
 	ConfPath string
 	YamlPath string
+	KeyPath  string
 	Interval string
 	Quit     chan bool
 }
@@ -38,6 +39,7 @@ type Key struct {
 	Date string `db:"DATE"`
 	Name string `db:"NAME"`
 	Key  string `db:"KEY"`
+	File string `db:"FILE"`
 }
 
 // GuiData - web gui data
@@ -48,4 +50,5 @@ type GuiData struct {
 	Plays  []Play
 	Themes []string
 	Len    int
+	Keys   []Key
 }

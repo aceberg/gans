@@ -14,18 +14,18 @@ import (
 
 // Gui - start web server
 func Gui(config models.Conf) {
-	AppConfig = config
+	AppConfig = conf.Get(config.ConfPath)
+
+	// Add if != "" later
+	AppConfig.DB = config.DB
+	AppConfig.ConfPath = config.ConfPath
+	AppConfig.YamlPath = config.YamlPath
+	AppConfig.Interval = config.Interval
 
 	log.Println("INFO: starting web gui with", AppConfig.ConfPath)
 
 	Repo = yaml.Read(AppConfig.YamlPath)
 	log.Println("INFO: repo", Repo)
-
-	tmpConfig := conf.Get(AppConfig.ConfPath)
-
-	AppConfig.Host = tmpConfig.Host
-	AppConfig.Port = tmpConfig.Port
-	AppConfig.Theme = tmpConfig.Theme
 
 	db.Create(AppConfig.DB)
 
@@ -43,6 +43,7 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/del/", delHandler)
 	http.HandleFunc("/filter/", filterHandler)
 	http.HandleFunc("/keys/", keysHandler)
+	http.HandleFunc("/key_del/", keyDelHandler)
 	http.HandleFunc("/new_key/", newKeyHandler)
 	http.HandleFunc("/repo/", repoHandler)
 	http.HandleFunc("/run/", runHandler)
