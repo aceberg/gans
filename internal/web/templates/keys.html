@@ -1,0 +1,25 @@
+{{ define "keys"}}
+<body>
+    <div class="container mt-3">
+        <table class="table">
+            <form action="/new_key/" method="post">
+                <tr>
+                    <td style="width: 20%;">Name</td>
+                    <td><input name="name" type="text" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Private key</td>
+                    <td><textarea name="key" style="width: 100%;" rows="3" wrap="soft"></textarea></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" class="btn btn-primary">Add key</button></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+        <table class="table table-striped">
+        </table>
+    </div>
+
+{{ template "footer" }}
+{{ end }}

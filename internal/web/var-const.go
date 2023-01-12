@@ -1,6 +1,8 @@
 package web
 
 import (
+	"embed"
+
 	"github.com/aceberg/gans/internal/models"
 )
 
@@ -19,6 +21,7 @@ var (
 
 // TemplPath - path to html templates
 const TemplPath = "templates/"
+
 // const TemplPath = "../../internal/web/templates/"
 
 // Icon - favicon

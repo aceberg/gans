@@ -19,6 +19,14 @@ func Create(path string) {
 		"ERROR"		TEXT
 	);`
 	exec(path, sqlStatement)
+
+	sqlStatement = `CREATE TABLE IF NOT EXISTS keys (
+		"ID"		INTEGER PRIMARY KEY,
+		"DATE"		TEXT,
+		"NAME"		TEXT,
+		"KEY"		TEXT
+	);`
+	exec(path, sqlStatement)
 }
 
 // Insert - insert one play into DB
@@ -26,6 +34,9 @@ func Insert(path string, play models.Play) {
 
 	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, INV, OUT, ERROR) 
 	VALUES ('%s','%s','%s','%s','%s','%s','%s');`
+
+	play.Out = quoteStr(play.Out)
+	play.Error = quoteStr(play.Error)
 
 	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Inv, play.Out, play.Error)
 

@@ -30,3 +30,16 @@ func Select(path string) []models.Play {
 
 	return playList
 }
+
+// SelectKeys - select all keys from DB
+func SelectKeys(path string) []models.Key {
+	var keyList []models.Key
+
+	dbx, err := sqlx.Connect("sqlite", path)
+	check.IfError(err)
+
+	err = dbx.Select(&keyList, "SELECT * FROM keys ORDER BY ID DESC")
+	check.IfError(err)
+
+	return keyList
+}

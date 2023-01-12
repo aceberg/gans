@@ -42,6 +42,8 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/config/", configHandler)
 	http.HandleFunc("/del/", delHandler)
 	http.HandleFunc("/filter/", filterHandler)
+	http.HandleFunc("/keys/", keysHandler)
+	http.HandleFunc("/new_key/", newKeyHandler)
 	http.HandleFunc("/repo/", repoHandler)
 	http.HandleFunc("/run/", runHandler)
 	http.HandleFunc("/save_config/", saveConfigHandler)

@@ -32,6 +32,14 @@ type Play struct {
 	Error string `db:"ERROR"`
 }
 
+// Key - ssh key
+type Key struct {
+	ID   int    `db:"ID"`
+	Date string `db:"DATE"`
+	Name string `db:"NAME"`
+	Key  string `db:"KEY"`
+}
+
 // GuiData - web gui data
 type GuiData struct {
 	Config Conf
