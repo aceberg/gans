@@ -9,11 +9,9 @@ FROM alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache git openssh-client ca-certificates bash \
-    && mkdir -p /data/gans \
-    && mkdir -p /root/.ssh
+RUN apk add --no-cache git ansible openssh-client ca-certificates bash sshpass \
+    && mkdir -p /data/gans 
 
 COPY --from=builder /gans /app/
-COPY config /root/.ssh/
 
 ENTRYPOINT ["./gans"]
