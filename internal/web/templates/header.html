@@ -30,6 +30,12 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+              {{ if .Len }}
+              <li class="nav-item">
+                <p class="nav-link active">
+                  <i class="bi bi-journal-text"></i>&nbsp;&nbsp;{{ .Len }}</p>
+              </li>
+              {{ end }}
               <li class="nav-item"><a class="nav-link active" target="_blank" href="https://github.com/aceberg/gans">
                 <h3>&nbsp;&nbsp;&nbsp;<i class="bi bi-github"></i></h3>
               </a></li>

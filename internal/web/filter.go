@@ -34,5 +34,8 @@ func filterHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	Plays = guiData.Plays
+	guiData.Len = len(Plays)
+
 	execTemplate(w, "index", guiData)
 }

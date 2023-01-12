@@ -4,11 +4,27 @@
         <table class="table table-striped">
             <tr>
                 <th style="width: 5%;">Del</th>
-                <th style="width: 15%;">Date</th>
-                <th>Host</th>
-                <th>File</th>
-                <th>Head</th>
-                <th>Status</th>
+                <th>ID</th>
+                <th style="width: 15%;">Date
+                    <a href="/sort?meth=date-up"><i class="bi bi-caret-up"></i></a>
+                    <a href="/sort?meth=date-down"><i class="bi bi-caret-down"></i></a>
+                </th>
+                <th>Host
+                    <a href="/sort?meth=host-up"><i class="bi bi-caret-up"></i></a>
+                    <a href="/sort?meth=host-down"><i class="bi bi-caret-down"></i></a>
+                </th>
+                <th>File
+                    <a href="/sort?meth=file-up"><i class="bi bi-caret-up"></i></a>
+                    <a href="/sort?meth=file-down"><i class="bi bi-caret-down"></i></a>
+                </th>
+                <th>Head
+                    <a href="/sort?meth=head-up"><i class="bi bi-caret-up"></i></a>
+                    <a href="/sort?meth=head-down"><i class="bi bi-caret-down"></i></a>
+                </th>
+                <th>Status
+                    <a href="/sort?meth=stat-up"><i class="bi bi-caret-up"></i></a>
+                    <a href="/sort?meth=stat-down"><i class="bi bi-caret-down"></i></a>
+                </th>
                 <th style="width: 5%;">Run</th>
             </tr>
         {{ range .Plays }}
@@ -18,7 +34,12 @@
                         <i class="bi bi-x-square"></i>
                     </a>
                 </td>
-                <td>{{ .Date }}</td>
+                <td>
+                    <a href="/status?id={{ .ID }}">{{ .ID }}</a>
+                </td>
+                <td>
+                    <a href="/status?id={{ .ID }}">{{ .Date }}</a>
+                </td>
                 <td>
                     <a href="/filter?by=host&tag={{ .Host }}">{{ .Host }}</a>
                 </td>

@@ -46,6 +46,7 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/run/", runHandler)
 	http.HandleFunc("/save_config/", saveConfigHandler)
 	http.HandleFunc("/save_repo/", saveRepoHandler)
+	http.HandleFunc("/sort/", sortHandler)
 	http.HandleFunc("/status/", statusHandler)
 	err := http.ListenAndServe(address, nil)
 	check.IfError(err)

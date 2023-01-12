@@ -16,5 +16,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	Plays = db.Select(AppConfig.DB)
 	guiData.Plays = Plays
 
+	guiData.Len = len(Plays)
+
 	execTemplate(w, "index", guiData)
 }

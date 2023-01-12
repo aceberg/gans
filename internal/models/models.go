@@ -39,4 +39,5 @@ type GuiData struct {
 	Repo   Repo
 	Plays  []Play
 	Themes []string
+	Len    int
 }
