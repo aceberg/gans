@@ -2,14 +2,16 @@
 <body>
     <div class="container mt-3">
         <table class="table">
-            <form action="/new_key/" method="post">
+            <form action="/new_key/" enctype="multipart/form-data" method="post">
                 <tr>
                     <td style="width: 20%;">File name</td>
                     <td><input name="name" type="text" class="form-control"></td>
                 </tr>
                 <tr>
                     <td>Private key</td>
-                    <td><textarea name="key" style="width: 100%;" rows="3" wrap="soft"></textarea></td>
+                    <td>
+                        <input type="file" name="keyfile" class="form-control">
+                    </td>
                 </tr>
                 <tr>
                     <td><button type="submit" class="btn btn-primary">Add key</button></td>
