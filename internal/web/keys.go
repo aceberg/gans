@@ -39,30 +39,35 @@ func newKeyHandler(w http.ResponseWriter, r *http.Request) {
 
 	key.Name = r.FormValue("name")
 
-	uploadFile, _, err := r.FormFile("keyfile")
-	check.IfError(err)
-	defer uploadFile.Close()
+	uploadFile, fileHeader, err := r.FormFile("keyfile")
+	if !check.IfError(err) {
+		defer uploadFile.Close()
 
-	key.Date = time.Now().Format("2006-01-02 15:04:05")
-	key.File = AppConfig.KeyPath + "/" + key.Name
+		if key.Name == "" {
+			key.Name = fileHeader.Filename
+		}
 
-	check.Path(AppConfig.KeyPath + "/" + "check.path")
-	err = os.Remove(AppConfig.KeyPath + "/" + "check.path")
-	check.IfError(err)
+		key.Date = time.Now().Format("2006-01-02 15:04:05")
+		key.File = AppConfig.KeyPath + "/" + key.Name
 
-	file, err := os.Create(key.File)
-	check.IfError(err)
-	defer file.Close()
+		check.Path(AppConfig.KeyPath + "/" + "check.path")
+		err = os.Remove(AppConfig.KeyPath + "/" + "check.path")
+		check.IfError(err)
 
-	_, err = io.Copy(file, uploadFile)
-	check.IfError(err)
+		file, err := os.Create(key.File)
+		check.IfError(err)
+		defer file.Close()
 
-	err = os.Chmod(key.File, 0600)
-	check.IfError(err)
+		_, err = io.Copy(file, uploadFile)
+		check.IfError(err)
 
-	db.InsertKey(AppConfig.DB, key)
+		err = os.Chmod(key.File, 0600)
+		check.IfError(err)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+		db.InsertKey(AppConfig.DB, key)
+	}
+
+	http.Redirect(w, r, "/keys/", 302)
 }
 
 func keyDelHandler(w http.ResponseWriter, r *http.Request) {

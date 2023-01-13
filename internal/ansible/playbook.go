@@ -13,11 +13,13 @@ import (
 )
 
 // Playbook - run one playbook for one host from inventory
-func Playbook(conf models.Conf, play models.Play) {
+func Playbook(conf models.Conf, play models.Play, path string) {
 
-	log.Println("EXEC: ansible-playbook -i ", play.Inv, "-l", play.Host, play.File)
+	commandString := "cd " + path + " && " + "ansible-playbook -i " + play.Inv + " -l " + play.Host + " " + play.File
 
-	cmd := exec.Command("ansible-playbook", "-i", play.Inv, "-l", play.Host, play.File)
+	log.Println("EXEC:", commandString)
+
+	cmd := exec.Command("sh", "-c", commandString)
 
 	out, err := cmd.CombinedOutput()
 

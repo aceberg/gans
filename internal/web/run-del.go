@@ -17,7 +17,7 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, play := range Plays {
 		if play.ID == id {
-			ansible.Playbook(AppConfig, play)
+			ansible.Playbook(AppConfig, play, Repo.Path)
 			break
 		}
 	}
