@@ -35,11 +35,11 @@ type Play struct {
 
 // Key - ssh key
 type Key struct {
-	ID   int    `db:"ID"`
-	Date string `db:"DATE"`
-	Name string `db:"NAME"`
-	Key  string `db:"KEY"`
-	File string `db:"FILE"`
+	ID    int    `db:"ID"`
+	Date  string `db:"DATE"`
+	Name  string `db:"NAME"`
+	File  string `db:"FILE"`
+	State string `db:"STATE"`
 }
 
 // GuiData - web gui data

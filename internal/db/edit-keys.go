@@ -9,12 +9,12 @@ import (
 // InsertKey - insert one key into DB
 func InsertKey(path string, key models.Key) {
 
-	sqlStatement := `INSERT INTO keys (DATE, NAME, KEY, FILE) 
+	sqlStatement := `INSERT INTO keys (DATE, NAME, FILE, STATE) 
 	VALUES ('%s','%s','%s','%s');`
 
 	key.Name = quoteStr(key.Name)
 
-	sqlStatement = fmt.Sprintf(sqlStatement, key.Date, key.Name, key.Key, key.File)
+	sqlStatement = fmt.Sprintf(sqlStatement, key.Date, key.Name, key.File, key.State)
 
 	exec(path, sqlStatement)
 }

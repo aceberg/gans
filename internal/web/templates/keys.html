@@ -26,6 +26,7 @@
                 <th>Date</th>
                 <th>Name</th>
                 <th>File</th>
+                <th>State on disk</th>
             </tr>
             {{ range .Keys }}
             <tr>
@@ -38,6 +39,15 @@
                 <td>{{ .Date }}</td>
                 <td>{{ .Name }}</td>
                 <td>{{ .File }}</td>
+                {{ if eq .State "Absent" }}
+                <td style="background-color: rgb(252, 162, 162)">
+                    {{ .State }}
+                </td>
+                {{ else }}
+                <td style="background-color: rgb(161, 245, 161)">
+                    {{ .State }}
+                </td>
+                {{ end }}
             </tr>
             {{ end}}
         </table>

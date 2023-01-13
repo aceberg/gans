@@ -19,7 +19,17 @@ func keysHandler(w http.ResponseWriter, r *http.Request) {
 	guiData.Config = AppConfig
 	guiData.Icon = Icon
 
-	guiData.Keys = db.SelectKeys(AppConfig.DB)
+	keys := db.SelectKeys(AppConfig.DB)
+
+	for _, key := range keys {
+		_, err := os.Stat(key.File)
+		if check.IfError(err) {
+			key.State = "Absent"
+		} else {
+			key.State = "Present"
+		}
+		guiData.Keys = append(guiData.Keys, key)
+	}
 
 	execTemplate(w, "keys", guiData)
 }
