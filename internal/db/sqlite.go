@@ -10,11 +10,18 @@ import (
 	"github.com/aceberg/gans/internal/models"
 )
 
-func exec(path string, sqlStatement string) {
+func connect(path string) *sqlx.DB {
 	dbx, err := sqlx.Connect("sqlite", path)
 	check.IfError(err)
 
-	_, err = dbx.Exec(sqlStatement)
+	return dbx
+}
+
+func exec(path string, sqlStatement string) {
+
+	dbx := connect(path)
+
+	_, err := dbx.Exec(sqlStatement)
 	check.IfError(err)
 }
 
@@ -22,10 +29,9 @@ func exec(path string, sqlStatement string) {
 func Select(path string) []models.Play {
 	var playList []models.Play
 
-	dbx, err := sqlx.Connect("sqlite", path)
-	check.IfError(err)
+	dbx := connect(path)
 
-	err = dbx.Select(&playList, "SELECT * FROM plays ORDER BY ID DESC")
+	err := dbx.Select(&playList, "SELECT * FROM plays ORDER BY ID DESC")
 	check.IfError(err)
 
 	return playList
@@ -35,10 +41,9 @@ func Select(path string) []models.Play {
 func SelectKeys(path string) []models.Key {
 	var keyList []models.Key
 
-	dbx, err := sqlx.Connect("sqlite", path)
-	check.IfError(err)
+	dbx := connect(path)
 
-	err = dbx.Select(&keyList, "SELECT * FROM keys ORDER BY ID DESC")
+	err := dbx.Select(&keyList, "SELECT * FROM keys ORDER BY ID DESC")
 	check.IfError(err)
 
 	return keyList
