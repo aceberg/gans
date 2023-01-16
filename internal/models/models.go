@@ -31,6 +31,7 @@ type Play struct {
 	Inv   string `db:"INV"`
 	Out   string `db:"OUT"`
 	Error string `db:"ERROR"`
+	Color string `db:"COLOR"`
 }
 
 // Key - ssh key

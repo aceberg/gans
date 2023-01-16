@@ -16,7 +16,8 @@ func Create(path string) {
 		"HEAD"		TEXT,
 		"INV"		TEXT,
 		"OUT"		TEXT,
-		"ERROR"		TEXT
+		"ERROR"		TEXT,
+		"COLOR"		TEXT
 	);`
 	exec(path, sqlStatement)
 
@@ -33,13 +34,13 @@ func Create(path string) {
 // Insert - insert one play into DB
 func Insert(path string, play models.Play) {
 
-	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, INV, OUT, ERROR) 
-	VALUES ('%s','%s','%s','%s','%s','%s','%s');`
+	sqlStatement := `INSERT INTO plays (DATE, HOST, FILE, HEAD, INV, OUT, ERROR, COLOR) 
+	VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');`
 
 	play.Out = quoteStr(play.Out)
 	play.Error = quoteStr(play.Error)
 
-	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Inv, play.Out, play.Error)
+	sqlStatement = fmt.Sprintf(sqlStatement, play.Date, play.Host, play.File, play.Head, play.Inv, play.Out, play.Error, play.Color)
 
 	exec(path, sqlStatement)
 }

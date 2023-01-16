@@ -15,6 +15,7 @@ func repoHandler(w http.ResponseWriter, r *http.Request) {
 	guiData.Config = AppConfig
 	guiData.Icon = Icon
 
+	Repo = yaml.Read(AppConfig.YamlPath)
 	guiData.Repo = Repo
 
 	execTemplate(w, "repo", guiData)

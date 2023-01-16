@@ -2,6 +2,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2023-01-17
+### Added
+- Color HEADs on Index page
+- Docker workflows
+
+### Fixed
+- Repo update
+
 ## [0.1.0] - 2023-01-11
 - [x] Execute Ansible playbook for 1 host
 - [x] Get host list from inventory

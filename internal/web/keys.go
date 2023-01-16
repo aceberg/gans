@@ -65,6 +65,16 @@ func newKeyHandler(w http.ResponseWriter, r *http.Request) {
 		check.IfError(err)
 
 		db.InsertKey(AppConfig.DB, key)
+	} else {
+		if key.Name != "" {
+
+			key.File = AppConfig.KeyPath + "/" + key.Name
+			_, err := os.Stat(key.File)
+
+			if !check.IfError(err) {
+				db.InsertKey(AppConfig.DB, key)
+			}
+		}
 	}
 
 	http.Redirect(w, r, "/keys/", 302)
