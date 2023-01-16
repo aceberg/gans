@@ -2,6 +2,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2023-01-
+### Added
+- Clear table button
+
 ## [0.1.1] - 2023-01-17
 ### Added
 - Color HEADs on Index page

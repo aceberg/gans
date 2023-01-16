@@ -1,9 +1,11 @@
 package web
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/aceberg/gans/internal/conf"
+	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
 )
 
@@ -24,6 +26,15 @@ func saveConfigHandler(w http.ResponseWriter, r *http.Request) {
 	AppConfig.Port = r.FormValue("port")
 	AppConfig.Theme = r.FormValue("theme")
 	conf.Write(AppConfig)
+
+	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+}
+
+func clearHandler(w http.ResponseWriter, r *http.Request) {
+
+	log.Println("INFO: deleting all plays from DB")
+
+	db.Clear(AppConfig.DB)
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }

@@ -39,6 +39,7 @@ func Gui(config models.Conf) {
 	log.Println("=================================== ")
 
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/clear/", clearHandler)
 	http.HandleFunc("/config/", configHandler)
 	http.HandleFunc("/del/", delHandler)
 	http.HandleFunc("/filter/", filterHandler)

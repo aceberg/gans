@@ -54,3 +54,9 @@ func Delete(path string, id int) {
 
 	exec(path, sqlStatement)
 }
+
+// Clear - delete all plays from table
+func Clear(path string) {
+	sqlStatement := `DELETE FROM plays;`
+	exec(path, sqlStatement)
+}
