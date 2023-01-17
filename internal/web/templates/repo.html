@@ -19,7 +19,8 @@
                     <td><input name="inv" type="text" class="form-control" value="{{ .Repo.Inv }}"></td>
                 </tr>
                 <tr>
-                    <td>Hosts</td>
+                    <td>Hosts<br>
+                    (space separated)</td>
                     <td><textarea name="hosts" class="form-control" style="width: 100%;" rows="3" wrap="soft">{{ range .Repo.Hosts }}{{ . }} {{ end }}</textarea></td>
                 </tr>
                 <tr>
