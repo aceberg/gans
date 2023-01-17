@@ -1,9 +1,7 @@
 # Roadmap
 
 ## ToDo
-- [ ] Use Repo timeout for playbook repeat
-- [ ] In play.Exec implement Quit before timeout ends
-- [ ] List all files in repo (`git ls-files`)
+- [ ] Use Repo timeout for playbook repeat (?)
 
 ## Done
 - [x] Execute Ansible playbook for 1 host
@@ -15,3 +13,5 @@
 - [x] For each playbook and for each host run Ansible
 - [x] Rename conf.Timeout to Interval
 - [x] Store results in DB
+- [x] In play.Exec implement Quit before timeout ends
+- [x] List all files in repo (`git ls-files`)

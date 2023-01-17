@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [0.1.2] - 2023-01-
 ### Added
 - Clear table button
+- List all files in repo, add Run button
+
+### Changed
+- In play.Exec implement Quit before timeout ends
 
 ## [0.1.1] - 2023-01-17
 ### Added

@@ -12,6 +12,7 @@ import (
 
 // Exec - execute playbooks
 func Exec(conf models.Conf, repo models.Repo) {
+	var lastDate time.Time
 
 	if !check.IsRepo(repo.Path) {
 		log.Println("ERROR: not a git repo", repo.Path)
@@ -29,11 +30,19 @@ func Exec(conf models.Conf, repo models.Repo) {
 		case <-conf.Quit:
 			return
 		default:
-			play(conf, repo)
+			nowDate := time.Now()
+			plusDate := lastDate.Add(time.Duration(tInt) * time.Second)
 
-			time.Sleep(time.Duration(tInt) * time.Second)
+			if nowDate.After(plusDate) {
 
-			repo = yaml.Read(conf.YamlPath)
+				play(conf, repo)
+
+				lastDate = time.Now()
+
+				repo = yaml.Read(conf.YamlPath)
+			}
+
+			time.Sleep(time.Duration(1) * time.Second) // Cycle to check if quit
 		}
 	}
 }

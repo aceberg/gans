@@ -7,18 +7,36 @@ import (
 	"github.com/aceberg/gans/internal/ansible"
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/db"
+	"github.com/aceberg/gans/internal/models"
 )
 
 func runHandler(w http.ResponseWriter, r *http.Request) {
 
 	idStr := r.URL.Query().Get("id")
-	id, err := strconv.Atoi(idStr)
-	check.IfError(err)
+	file := r.URL.Query().Get("file")
 
-	for _, play := range Plays {
-		if play.ID == id {
+	if idStr != "" {
+		id, err := strconv.Atoi(idStr)
+		check.IfError(err)
+
+		for _, play := range Plays {
+			if play.ID == id {
+				ansible.Playbook(AppConfig, play, Repo.Path)
+				break
+			}
+		}
+	}
+
+	if file != "" {
+		var play models.Play
+
+		play.Head = Repo.Head
+		play.Inv = Repo.Path + "/" + Repo.Inv
+		play.File = Repo.Path + "/" + file
+
+		for _, host := range Repo.Hosts {
+			play.Host = host
 			ansible.Playbook(AppConfig, play, Repo.Path)
-			break
 		}
 	}
 
