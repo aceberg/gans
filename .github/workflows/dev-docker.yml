@@ -1,4 +1,4 @@
-name: Dev-to-docker
+name: Dev-Docker
 
 on:
   workflow_dispatch:

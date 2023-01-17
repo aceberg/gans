@@ -1,0 +1,12 @@
+[Unit]
+Description=gans
+Documentation=https://github.com/aceberg/gans
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/gans
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

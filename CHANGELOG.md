@@ -2,10 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.1.2] - 2023-01-
+## [0.1.2] - 2023-01-18
 ### Added
 - Clear table button
 - List all files in repo, add Run button
+- Short file names on Index page
+- Binary and Deb release
 
 ### Changed
 - In play.Exec implement Quit before timeout ends
