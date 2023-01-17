@@ -1,0 +1,19 @@
+version: "3"
+services:
+  gans:
+    image: aceberg/gans      
+    restart: unless-stopped
+    ports:
+    - 8845:8845
+    volumes:
+    - ~/.dockerdata/gans:/data/gans
+    environment:
+      TZ: Asia/Novosibirsk                # required: needs your TZ for correct time
+      DB: "/data/gans/sqlite.db"          # optional, default: /data/gans/sqlite.db
+      HOST: "0.0.0.0"                     # optional, default: 0.0.0.0
+      PORT: "8845"                        # optional, default: 8845
+      THEME: "pulse"                      # optional, default: cerulean
+      SHOW: "25"                          # optional, default: 25
+      YAMLPATH: "/data/gans/repo.yaml"    # optional, default: /data/gans/repo.yaml
+      KEYPATH: "/data/gans/ssh"           # optional, default: /data/gans/ssh
+      INTERVAL: "5s"                      # optional, default: 5s

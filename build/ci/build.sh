@@ -11,6 +11,7 @@ umask 0022
 mkdir -p $PKGDIR
 cp $PKGNAME $PKGDIR/
 cp configs/$PKGNAME.service $PKGDIR/
+cp configs/$PKGNAME@.service $PKGDIR/
 cp configs/install.sh $PKGDIR/
 
 cd /opt

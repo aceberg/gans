@@ -9,6 +9,7 @@ mkdir -p $PKGDIR/usr/bin
 mkdir -p $PKGDIR/lib/systemd/system
 
 cp configs/$PKGNAME.service $PKGDIR/lib/systemd/system/
+cp configs/$PKGNAME@.service $PKGDIR/lib/systemd/system/
 
 cp $PKGNAME $PKGDIR/usr/bin/
 

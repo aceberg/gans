@@ -5,7 +5,8 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/gans
+User=%i
+ExecStart=/usr/bin/gans -c /home/%i/.config/gans/config.yaml -r /home/%i/.config/gans/repo.yaml -d /home/%i/.config/gans/sqlite.db
 Restart=on-failure
 
 [Install]
