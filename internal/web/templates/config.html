@@ -7,6 +7,10 @@
         <table class="table">
             <form action="/save_config/" method="post">
                 <tr>
+                    <td>DB Path</td>
+                    <td><input name="db" type="text" class="form-control" value="{{ .Config.DB }}"></td>
+                </tr>
+                <tr>
                     <td>Host</td>
                     <td><input name="host" type="text" class="form-control" value="{{ .Config.Host }}"></td>
                 </tr>
@@ -28,6 +32,18 @@
                     <td><input name="show" type="text" class="form-control" value="{{ .Config.Show }}"></td>
                 </tr>
                 <tr>
+                    <td>Yaml Path</td>
+                    <td><input name="yamlpath" type="text" class="form-control" value="{{ .Config.YamlPath }}"></td>
+                </tr>
+                <tr>
+                    <td>Key Path</td>
+                    <td><input name="keypath" type="text" class="form-control" value="{{ .Config.KeyPath }}"></td>
+                </tr>
+                <tr>
+                    <td>Interval</td>
+                    <td><input name="interval" type="text" class="form-control" value="{{ .Config.Interval }}"></td>
+                </tr>
+                <tr>
                     <td><button type="submit" class="btn btn-primary">Save</button></td>
                     <td></td>
                 </tr>
@@ -36,8 +52,11 @@
         </div>
         <div class="col">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">Warning!</h4>
-                <p>After changing <b>Host</b> or <b>Port</b> you need to restart the app</p>
+                <p>● After changing <b>DB Path</b>, <b>Host</b>, <b>Port</b> or <b>Yaml Path</b> you need to restart the app</p>
+                <p>● <b>Show</b> - how many lines to show on index page</p>
+                <p>● <b>Yaml Path</b> - path to `repo.yaml` or other file, where git repo is described</p>
+                <p>● <b>Key Path</b> - path to ssh keys directory</p>
+                <p>● <b>Interval</b> - interval between repo scans (s, m, h)</p>
             </div>
             <br>
             <form action="/clear/" method="post">

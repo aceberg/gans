@@ -11,14 +11,14 @@ import (
 )
 
 const dbPath = "/data/gans/sqlite.db"
-const yamlPath = "/data/gans/repos.yaml"
+const yamlPath = "/data/gans/repo.yaml"
 const interval = "5s"
 
 func main() {
 	var conf models.Conf
 
 	dbPtr := flag.String("d", dbPath, "Path to sqlite DB file")
-	yamlPtr := flag.String("r", yamlPath, "Path to repos yaml file")
+	yamlPtr := flag.String("r", yamlPath, "Path to repo yaml file")
 	timePtr := flag.String("t", interval, "Interval between repo scans (s, m, h)")
 	flag.Parse()
 

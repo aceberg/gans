@@ -7,6 +7,8 @@ import (
 	"github.com/aceberg/gans/internal/conf"
 	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
+	"github.com/aceberg/gans/internal/play"
+	"github.com/aceberg/gans/internal/yaml"
 )
 
 func configHandler(w http.ResponseWriter, r *http.Request) {
@@ -22,11 +24,24 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 func saveConfigHandler(w http.ResponseWriter, r *http.Request) {
 
+	AppConfig.DB = r.FormValue("db")
 	AppConfig.Host = r.FormValue("host")
 	AppConfig.Port = r.FormValue("port")
 	AppConfig.Theme = r.FormValue("theme")
 	AppConfig.Show = r.FormValue("show")
+	AppConfig.YamlPath = r.FormValue("yamlpath")
+	AppConfig.KeyPath = r.FormValue("keypath")
+	AppConfig.Interval = r.FormValue("interval")
+
+	close(AppConfig.Quit)
+
 	conf.Write(AppConfig)
+	log.Println("INFO: new config", AppConfig)
+
+	Repo = yaml.Read(AppConfig.YamlPath)
+
+	AppConfig.Quit = make(chan bool)
+	go play.Exec(AppConfig, Repo)
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }

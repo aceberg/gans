@@ -14,13 +14,7 @@ import (
 
 // Gui - start web server
 func Gui(config models.Conf) {
-	AppConfig = conf.Get(config.ConfPath)
-
-	// Add if != "" later
-	AppConfig.DB = config.DB
-	AppConfig.ConfPath = config.ConfPath
-	AppConfig.YamlPath = config.YamlPath
-	AppConfig.Interval = config.Interval
+	AppConfig = mergeConfig(config)
 
 	log.Println("INFO: starting web gui with", AppConfig.ConfPath)
 
@@ -54,4 +48,22 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/status/", statusHandler)
 	err := http.ListenAndServe(address, nil)
 	check.IfError(err)
+}
+
+func mergeConfig(config models.Conf) models.Conf {
+
+	newConfig := conf.Get(config.ConfPath)
+	newConfig.ConfPath = config.ConfPath
+
+	if config.DB != "" {
+		newConfig.DB = config.DB
+	}
+	if config.YamlPath != "" {
+		newConfig.YamlPath = config.YamlPath
+	}
+	if config.Interval != "" {
+		newConfig.Interval = config.Interval
+	}
+
+	return newConfig
 }
