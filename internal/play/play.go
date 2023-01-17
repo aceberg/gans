@@ -26,12 +26,12 @@ func play(conf models.Conf, repo models.Repo) {
 			log.Println("INFO: changed files", files)
 
 			play.Head = head
-			play.Inv = repo.Path + "/" + repo.Inv
+			play.Inv = repo.Inv
 
 			for _, file := range files {
-				play.File = repo.Path + "/" + file
+				play.File = file
 
-				if check.IsYaml(play.File) && (play.File != play.Inv) {
+				if check.IsYaml(repo.Path+"/"+play.File) && (play.File != play.Inv) {
 					for _, host := range repo.Hosts {
 						play.Host = host
 						ansible.Playbook(conf, play, repo.Path)

@@ -14,6 +14,7 @@ func Get(path string) models.Conf {
 	viper.SetDefault("HOST", "0.0.0.0")
 	viper.SetDefault("PORT", "8845")
 	viper.SetDefault("THEME", "cerulean")
+	viper.SetDefault("SHOW", "25")
 	viper.SetDefault("KEYPATH", "/data/gans/ssh")
 	// viper.SetDefault("KEYPATH", "/root/.ssh")
 
@@ -27,6 +28,7 @@ func Get(path string) models.Conf {
 	config.Host, _ = viper.Get("HOST").(string)
 	config.Port, _ = viper.Get("PORT").(string)
 	config.Theme, _ = viper.Get("THEME").(string)
+	config.Show, _ = viper.Get("SHOW").(string)
 	config.KeyPath, _ = viper.Get("KEYPATH").(string)
 
 	return config
@@ -41,6 +43,7 @@ func Write(config models.Conf) {
 	viper.Set("host", config.Host)
 	viper.Set("port", config.Port)
 	viper.Set("theme", config.Theme)
+	viper.Set("show", config.Show)
 	viper.Set("keypath", config.KeyPath)
 
 	err := viper.WriteConfig()

@@ -25,6 +25,7 @@ func saveConfigHandler(w http.ResponseWriter, r *http.Request) {
 	AppConfig.Host = r.FormValue("host")
 	AppConfig.Port = r.FormValue("port")
 	AppConfig.Theme = r.FormValue("theme")
+	AppConfig.Show = r.FormValue("show")
 	conf.Write(AppConfig)
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)

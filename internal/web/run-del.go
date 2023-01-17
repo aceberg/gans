@@ -31,8 +31,8 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 		var play models.Play
 
 		play.Head = Repo.Head
-		play.Inv = Repo.Path + "/" + Repo.Inv
-		play.File = Repo.Path + "/" + file
+		play.Inv = Repo.Inv
+		play.File = file
 
 		for _, host := range Repo.Hosts {
 			play.Host = host
