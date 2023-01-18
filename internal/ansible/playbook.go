@@ -25,7 +25,9 @@ func Playbook(conf models.Conf, play models.Play, path string) {
 
 	play.Out = string(out)
 
-	play.Color = play.Head[0:6]
+	if play.Head != "" {
+		play.Color = play.Head[0:6]
+	}
 
 	if check.IfError(err) {
 		play.Error = fmt.Sprintf("%s", err)
