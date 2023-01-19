@@ -19,11 +19,6 @@
                     <td><input name="inv" type="text" class="form-control" value="{{ .Repo.Inv }}"></td>
                 </tr>
                 <tr>
-                    <td>Hosts<br>
-                    (space separated)</td>
-                    <td><textarea name="hosts" class="form-control" style="width: 100%;" rows="3" wrap="soft">{{ range .Repo.Hosts }}{{ . }} {{ end }}</textarea></td>
-                </tr>
-                <tr>
                     <td><button type="submit" class="btn btn-primary">Save</button></td>
                     <td></td>
                 </tr>
@@ -33,23 +28,27 @@
     </div>
     <div class="row">
         <div class="col">
+            <form action="/host_add/" method="post" class="input-group">
+                <input name="host" type="text" class="form-control" placeholder="Host" style="max-width: 25%;">
+                <input name="groups" type="text" class="form-control" placeholder="Groups (space separated)">
+                <button type="submit" class="btn btn-primary">Add host</button>
+            </form>
+            <br>
             <table class="table table-striped">
                 <tr>
-                    <th>Playbook</th>
-                    <th>Run for all hosts</th>
-                    <!-- <th>Run for one host</th> -->
+                    <th style="width: 5%;">Del</th>
+                    <th>Host</th>
+                    <th>Groups</th>
                 </tr>
-                {{ range .Themes }}
+                {{ range .Repo.Hosts }}
                 <tr>
-                    <td>{{ . }}</td>
                     <td>
-                        <a href="/run?file={{ . }}">
-                            <i class="bi bi-caret-right-square"></i>
+                        <a href="/host_del?name={{ .Host }}">
+                            <i class="bi bi-x-square"></i>
                         </a>
                     </td>
-                    <!-- <td>
-                        <a href="/run?file={{ . }}">Host</a>
-                    </td> -->
+                    <td>{{ .Host }}</td>
+                    <td>{{ .Groups }}</td>
                 </tr>
                 {{ end }}
             </table>

@@ -1,0 +1,33 @@
+{{ define "plays" }}
+
+<body>
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <tr>
+                    <th>Playbook</th>
+                    <th>Run for all hosts</th>
+                    <!-- <th>Run for one host</th> -->
+                </tr>
+                {{ range .Themes }}
+                <tr>
+                    <td>{{ . }}</td>
+                    <td>
+                        <a href="/run?file={{ . }}">
+                            <i class="bi bi-caret-right-square"></i>
+                        </a>
+                    </td>
+                    <!-- <td>
+                        <a href="/run?file={{ . }}">Host</a>
+                    </td> -->
+                </tr>
+                {{ end }}
+            </table>
+        </div>
+    </div>
+    </div>
+        
+
+{{ template "footer" }}
+{{ end }}

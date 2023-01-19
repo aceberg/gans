@@ -14,12 +14,18 @@ type Conf struct {
 	Quit     chan bool
 }
 
+// Host - one host and its groups
+type Host struct {
+	Host   string
+	Groups []string
+}
+
 // Repo - git repository
 type Repo struct {
-	Path  string   `yaml:"path"`
-	Head  string   `yaml:"head"`
-	Inv   string   `yaml:"inventory"`
-	Hosts []string `yaml:"hosts"`
+	Path  string `yaml:"path"`
+	Head  string `yaml:"head"`
+	Inv   string `yaml:"inventory"`
+	Hosts []Host `yaml:"hosts"`
 }
 
 // Play - info about ansible-playbook run

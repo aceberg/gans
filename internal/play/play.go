@@ -33,7 +33,7 @@ func play(conf models.Conf, repo models.Repo) {
 
 				if check.IsYaml(repo.Path+"/"+play.File) && (play.File != play.Inv) {
 					for _, host := range repo.Hosts {
-						play.Host = host
+						play.Host = host.Host
 						ansible.Playbook(conf, play, repo.Path)
 					}
 				}

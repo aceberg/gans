@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/aceberg/gans/internal/check"
-	"github.com/aceberg/gans/internal/git"
 	"github.com/aceberg/gans/internal/models"
 	"github.com/aceberg/gans/internal/play"
 	"github.com/aceberg/gans/internal/yaml"
@@ -20,14 +18,6 @@ func repoHandler(w http.ResponseWriter, r *http.Request) {
 	Repo = yaml.Read(AppConfig.YamlPath)
 	guiData.Repo = Repo
 
-	files := git.List(Repo.Path)
-
-	for _, oneFile := range files {
-		if oneFile != "" && check.IsYaml(Repo.Path+"/"+oneFile) && oneFile != Repo.Inv {
-			guiData.Themes = append(guiData.Themes, oneFile)
-		}
-	}
-
 	execTemplate(w, "repo", guiData)
 }
 
@@ -40,10 +30,13 @@ func saveRepoHandler(w http.ResponseWriter, r *http.Request) {
 
 	hosts := strings.Split(hostsStr, " ")
 
-	Repo.Hosts = []string{}
+	Repo.Hosts = []models.Host{}
+	var oneHost models.Host
+
 	for _, host := range hosts {
 		if host != "" {
-			Repo.Hosts = append(Repo.Hosts, host)
+			oneHost.Host = host
+			Repo.Hosts = append(Repo.Hosts, oneHost)
 		}
 	}
 
