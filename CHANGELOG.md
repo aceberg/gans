@@ -2,6 +2,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2023-01-20
+### Added
+- Run only for hosts in playbook
+
+### Changed
+- Repo file format
+
 ## [0.1.2] - 2023-01-18
 ### Added
 - Clear table button
