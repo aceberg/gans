@@ -1,6 +1,7 @@
 package web
 
 import (
+	"log"
 	"net/http"
 	"strconv"
 
@@ -8,7 +9,28 @@ import (
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
+	"github.com/aceberg/gans/internal/yaml"
 )
+
+func runGroupHandler(w http.ResponseWriter, r *http.Request) {
+	var play models.Play
+
+	play.Head = Repo.Head
+	play.Inv = Repo.Inv
+	play.File = r.FormValue("file")
+
+	group := r.FormValue("group")
+	hosts := AppConfig.GrMap[group]
+
+	log.Println("INFO: playbook group", group, "hosts:", hosts)
+
+	for _, host := range hosts {
+		play.Host = host
+		ansible.Playbook(AppConfig, play, Repo.Path)
+	}
+
+	http.Redirect(w, r, "/", 302)
+}
 
 func runHandler(w http.ResponseWriter, r *http.Request) {
 
@@ -34,8 +56,13 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 		play.Inv = Repo.Inv
 		play.File = file
 
-		for _, host := range Repo.Hosts {
-			play.Host = host.Name
+		group := yaml.GetPlayHosts(Repo.Path + "/" + play.File)
+		hosts := AppConfig.GrMap[group]
+
+		log.Println("INFO: playbook group", group, "hosts:", hosts)
+
+		for _, host := range hosts {
+			play.Host = host
 			ansible.Playbook(AppConfig, play, Repo.Path)
 		}
 	}

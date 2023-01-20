@@ -8,19 +8,31 @@
                 <tr>
                     <th>Playbook</th>
                     <th>Run for all hosts</th>
-                    <!-- <th>Run for one host</th> -->
+                    <th>Run for one host or group</th>
                 </tr>
-                {{ range .Themes }}
+                {{ range .Keys }}
                 <tr>
-                    <td>{{ . }}</td>
                     <td>
-                        <a href="/run?file={{ . }}">
-                            <i class="bi bi-caret-right-square"></i>
+                        <a href="/filter?by=file&tag={{ .Name }}">{{ .Name }}</a>
+                    </td>
+                    <td>
+                        <a href="/run?file={{ .Name }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Run</button>
                         </a>
                     </td>
-                    <!-- <td>
-                        <a href="/run?file={{ . }}">Host</a>
-                    </td> -->
+                    <td>
+                    <form action="/run_group/" method="post" class="input-group">
+                        <input name="file" value="{{ .Name }}" type="hidden">
+                        <select name="group" class="form-select form-select-sm">
+                            {{ range $.Themes }}
+                            <option value="{{ . }}">
+                                {{ . }}
+                            </option>
+                            {{ end }}
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm">Run</button>
+                    </form>
+                    </td>
                 </tr>
                 {{ end }}
             </table>

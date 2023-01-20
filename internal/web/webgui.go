@@ -46,6 +46,7 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/plays/", playsHandler)
 	http.HandleFunc("/repo/", repoHandler)
 	http.HandleFunc("/run/", runHandler)
+	http.HandleFunc("/run_group/", runGroupHandler)
 	http.HandleFunc("/save_config/", saveConfigHandler)
 	http.HandleFunc("/save_repo/", saveRepoHandler)
 	http.HandleFunc("/sort/", sortHandler)
