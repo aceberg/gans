@@ -39,6 +39,7 @@ func saveConfigHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("INFO: new config", AppConfig)
 
 	Repo = yaml.Read(AppConfig.YamlPath)
+	AppConfig.GrMap = play.HostsToMap(Repo.Hosts)
 
 	AppConfig.Quit = make(chan bool)
 	go play.Exec(AppConfig, Repo)

@@ -35,7 +35,7 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 		play.File = file
 
 		for _, host := range Repo.Hosts {
-			play.Host = host.Host
+			play.Host = host.Name
 			ansible.Playbook(AppConfig, play, Repo.Path)
 		}
 	}

@@ -12,11 +12,12 @@ type Conf struct {
 	KeyPath  string
 	Interval string
 	Quit     chan bool
+	GrMap    map[string][]string
 }
 
 // Host - one host and its groups
 type Host struct {
-	Host   string
+	Name   string
 	Groups []string
 }
 

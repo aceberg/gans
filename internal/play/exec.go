@@ -40,6 +40,7 @@ func Exec(conf models.Conf, repo models.Repo) {
 				lastDate = time.Now()
 
 				repo = yaml.Read(conf.YamlPath)
+				conf.GrMap = HostsToMap(repo.Hosts)
 			}
 
 			time.Sleep(time.Duration(1) * time.Second) // Cycle to check if quit

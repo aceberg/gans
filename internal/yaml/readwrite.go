@@ -1,6 +1,7 @@
 package yaml
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -33,4 +34,22 @@ func Write(path string, repo models.Repo) {
 	check.IfError(err)
 
 	log.Println("INFO: writing new repo file to", path, "\n", string(yamlData))
+}
+
+// GetPlayHosts - get valuse of "hosts:"
+func GetPlayHosts(path string) string {
+
+	file, err := os.ReadFile(path)
+	check.IfError(err)
+
+	var data []interface{}
+
+	err = yaml.Unmarshal(file, &data)
+	check.IfError(err)
+
+	myMap := data[0].(map[string]interface{})
+
+	str := fmt.Sprintf("%v", myMap["hosts"])
+
+	return str
 }

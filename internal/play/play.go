@@ -32,8 +32,14 @@ func play(conf models.Conf, repo models.Repo) {
 				play.File = file
 
 				if check.IsYaml(repo.Path+"/"+play.File) && (play.File != play.Inv) {
-					for _, host := range repo.Hosts {
-						play.Host = host.Host
+
+					group := yaml.GetPlayHosts(repo.Path + "/" + play.File)
+					hosts := conf.GrMap[group]
+
+					log.Println("INFO: playbook group", group, "hosts:", hosts)
+
+					for _, host := range hosts {
+						play.Host = host
 						ansible.Playbook(conf, play, repo.Path)
 					}
 				}

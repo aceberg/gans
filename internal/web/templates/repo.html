@@ -43,11 +43,11 @@
                 {{ range .Repo.Hosts }}
                 <tr>
                     <td>
-                        <a href="/host_del?name={{ .Host }}">
+                        <a href="/host_del?name={{ .Name }}">
                             <i class="bi bi-x-square"></i>
                         </a>
                     </td>
-                    <td>{{ .Host }}</td>
+                    <td>{{ .Name }}</td>
                     <td>{{ .Groups }}</td>
                 </tr>
                 {{ end }}

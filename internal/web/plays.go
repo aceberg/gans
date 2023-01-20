@@ -6,7 +6,6 @@ import (
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/git"
 	"github.com/aceberg/gans/internal/models"
-	"github.com/aceberg/gans/internal/yaml"
 )
 
 func playsHandler(w http.ResponseWriter, r *http.Request) {
@@ -15,7 +14,6 @@ func playsHandler(w http.ResponseWriter, r *http.Request) {
 	guiData.Config = AppConfig
 	guiData.Icon = Icon
 
-	Repo = yaml.Read(AppConfig.YamlPath)
 	guiData.Repo = Repo
 
 	files := git.List(Repo.Path)

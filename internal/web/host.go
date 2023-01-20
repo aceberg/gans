@@ -12,10 +12,10 @@ import (
 func hostAddHandler(w http.ResponseWriter, r *http.Request) {
 	var oneHost models.Host
 
-	oneHost.Host = r.FormValue("host")
+	oneHost.Name = r.FormValue("host")
 	grStr := r.FormValue("groups")
 
-	if oneHost.Host != "" {
+	if oneHost.Name != "" {
 		groups := strings.Split(grStr, " ")
 
 		for _, gr := range groups {
@@ -26,6 +26,8 @@ func hostAddHandler(w http.ResponseWriter, r *http.Request) {
 
 		Repo = yaml.Read(AppConfig.YamlPath)
 		Repo.Hosts = append(Repo.Hosts, oneHost)
+
+		AppConfig.GrMap = play.HostsToMap(Repo.Hosts)
 
 		close(AppConfig.Quit)
 		yaml.Write(AppConfig.YamlPath, Repo)
@@ -45,12 +47,13 @@ func hostDelHandler(w http.ResponseWriter, r *http.Request) {
 	Repo = yaml.Read(AppConfig.YamlPath)
 
 	for _, oneHost := range Repo.Hosts {
-		if oneHost.Host != host {
+		if oneHost.Name != host {
 			newHosts = append(newHosts, oneHost)
 		}
 	}
 
 	Repo.Hosts = newHosts
+	AppConfig.GrMap = play.HostsToMap(Repo.Hosts)
 
 	close(AppConfig.Quit)
 	yaml.Write(AppConfig.YamlPath, Repo)

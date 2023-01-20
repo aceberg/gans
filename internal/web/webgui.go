@@ -19,6 +19,7 @@ func Gui(config models.Conf) {
 	log.Println("INFO: starting web gui with", AppConfig.ConfPath)
 
 	Repo = yaml.Read(AppConfig.YamlPath)
+	AppConfig.GrMap = play.HostsToMap(Repo.Hosts)
 	log.Println("INFO: repo", Repo)
 
 	db.Create(AppConfig.DB)
