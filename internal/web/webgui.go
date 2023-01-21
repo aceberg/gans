@@ -42,6 +42,7 @@ func Gui(config models.Conf) {
 	http.HandleFunc("/host_del/", hostDelHandler)
 	http.HandleFunc("/keys/", keysHandler)
 	http.HandleFunc("/key_del/", keyDelHandler)
+	http.HandleFunc("/log/", logHandler)
 	http.HandleFunc("/new_key/", newKeyHandler)
 	http.HandleFunc("/plays/", playsHandler)
 	http.HandleFunc("/repo/", repoHandler)
@@ -68,6 +69,9 @@ func mergeConfig(config models.Conf) models.Conf {
 	}
 	if config.Interval != "" {
 		newConfig.Interval = config.Interval
+	}
+	if config.LogPath != "" {
+		newConfig.LogPath = config.LogPath
 	}
 
 	return newConfig

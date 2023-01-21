@@ -10,6 +10,7 @@ type Conf struct {
 	ConfPath string
 	YamlPath string
 	KeyPath  string
+	LogPath  string
 	Interval string
 	Quit     chan bool
 	GrMap    map[string][]string
