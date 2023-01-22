@@ -2,10 +2,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.2.1] - 2023-01-21
+## [0.2.1] - 2023-01-22
 ### Added
 - Run only for hosts in playbook
 - Display Log page
+- Check if file is a playbook
+- Support more than one host in playbook
 
 ### Changed
 - Repo file format

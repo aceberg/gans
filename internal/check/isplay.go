@@ -5,7 +5,8 @@ func IsPlay(path string) bool {
 
 	if IsYaml(path) {
 
-		if PlayHosts(path) != "" {
+		_, pin := PlayHosts(path)
+		if pin {
 			return true
 		}
 	}

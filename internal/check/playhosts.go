@@ -6,8 +6,9 @@ import (
 )
 
 // PlayHosts - get valuse of "hosts:"
-func PlayHosts(path string) string {
+func PlayHosts(path string) ([]string, bool) {
 	var out string
+	var pin bool
 
 	file, err := os.ReadFile(path)
 	IfError(err)
@@ -23,10 +24,14 @@ func PlayHosts(path string) string {
 	}
 
 	if out == "" {
-		return out
+		lines = []string{}
+		pin = false
+	} else {
+		hosts1 := strings.Split(out, "hosts: ")
+		hosts2 := strings.Split(hosts1[1], "#")
+		lines = strings.Split(hosts2[0], " ")
+		pin = true
 	}
 
-	hostsLine := strings.Split(out, "hosts: ")
-	hosts := strings.Split(hostsLine[1], "#")
-	return hosts[0]
+	return lines, pin
 }

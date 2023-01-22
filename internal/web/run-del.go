@@ -50,16 +50,19 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 
 	if file != "" {
 		var play models.Play
+		var hosts []string
 
 		play.Head = Repo.Head
 		play.Inv = Repo.Inv
 		play.File = file
 
-		group := check.PlayHosts(Repo.Path + "/" + play.File)
+		groups, _ := check.PlayHosts(Repo.Path + "/" + play.File)
 
-		hosts := AppConfig.GrMap[group]
+		for _, group := range groups {
+			hosts = append(hosts, AppConfig.GrMap[group]...)
+		}
 
-		log.Println("INFO: playbook group", group, "hosts:", hosts)
+		log.Println("INFO: playbook groups", groups, "hosts:", hosts)
 
 		for _, host := range hosts {
 			play.Host = host

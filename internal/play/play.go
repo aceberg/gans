@@ -12,6 +12,7 @@ import (
 
 func play(conf models.Conf, repo models.Repo) {
 	var play models.Play
+	var hosts []string
 
 	head := git.Head(repo.Path)
 	head = head[0:7]
@@ -33,11 +34,13 @@ func play(conf models.Conf, repo models.Repo) {
 
 				if check.IsPlay(repo.Path+"/"+play.File) && (play.File != play.Inv) {
 
-					group := check.PlayHosts(repo.Path + "/" + play.File)
+					groups, _ := check.PlayHosts(repo.Path + "/" + play.File)
 
-					hosts := conf.GrMap[group]
+					for _, group := range groups {
+						hosts = append(hosts, conf.GrMap[group]...)
+					}
 
-					log.Println("INFO: playbook group", group, "hosts:", hosts)
+					log.Println("INFO: playbook groups", groups, "hosts:", hosts)
 
 					for _, host := range hosts {
 						play.Host = host
