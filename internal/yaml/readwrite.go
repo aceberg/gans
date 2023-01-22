@@ -1,7 +1,7 @@
 package yaml
 
 import (
-	"fmt"
+	// "fmt"
 	"log"
 	"os"
 
@@ -37,19 +37,19 @@ func Write(path string, repo models.Repo) {
 }
 
 // GetPlayHosts - get valuse of "hosts:"
-func GetPlayHosts(path string) string {
+// func GetPlayHosts(path string) (string, error) {
 
-	file, err := os.ReadFile(path)
-	check.IfError(err)
+// 	file, err := os.ReadFile(path)
+// 	check.IfError(err)
 
-	var data []interface{}
+// 	var data []interface{}
 
-	err = yaml.Unmarshal(file, &data)
-	check.IfError(err)
+// 	err = yaml.Unmarshal(file, &data)
+// 	check.IfError(err)
 
-	myMap := data[0].(map[string]interface{})
+// 	myMap := data[0].(map[string]interface{})
 
-	str := fmt.Sprintf("%v", myMap["hosts"])
+// 	str := fmt.Sprintf("%v", myMap["hosts"])
 
-	return str
-}
+// 	return str, err
+// }

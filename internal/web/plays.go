@@ -20,7 +20,7 @@ func playsHandler(w http.ResponseWriter, r *http.Request) {
 	files := git.List(Repo.Path)
 
 	for _, oneFile := range files {
-		if oneFile != "" && check.IsYaml(Repo.Path+"/"+oneFile) && oneFile != Repo.Inv {
+		if oneFile != "" && check.IsPlay(Repo.Path+"/"+oneFile) && oneFile != Repo.Inv {
 			key.Name = oneFile
 			guiData.Keys = append(guiData.Keys, key)
 		}

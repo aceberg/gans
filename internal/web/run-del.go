@@ -9,7 +9,6 @@ import (
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
-	"github.com/aceberg/gans/internal/yaml"
 )
 
 func runGroupHandler(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +55,8 @@ func runHandler(w http.ResponseWriter, r *http.Request) {
 		play.Inv = Repo.Inv
 		play.File = file
 
-		group := yaml.GetPlayHosts(Repo.Path + "/" + play.File)
+		group := check.PlayHosts(Repo.Path + "/" + play.File)
+
 		hosts := AppConfig.GrMap[group]
 
 		log.Println("INFO: playbook group", group, "hosts:", hosts)

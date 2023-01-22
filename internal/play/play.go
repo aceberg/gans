@@ -31,9 +31,10 @@ func play(conf models.Conf, repo models.Repo) {
 			for _, file := range files {
 				play.File = file
 
-				if check.IsYaml(repo.Path+"/"+play.File) && (play.File != play.Inv) {
+				if check.IsPlay(repo.Path+"/"+play.File) && (play.File != play.Inv) {
 
-					group := yaml.GetPlayHosts(repo.Path + "/" + play.File)
+					group := check.PlayHosts(repo.Path + "/" + play.File)
+
 					hosts := conf.GrMap[group]
 
 					log.Println("INFO: playbook group", group, "hosts:", hosts)
