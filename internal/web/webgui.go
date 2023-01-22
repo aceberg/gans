@@ -67,9 +67,6 @@ func mergeConfig(config models.Conf) models.Conf {
 	if config.YamlPath != "" {
 		newConfig.YamlPath = config.YamlPath
 	}
-	if config.Interval != "" {
-		newConfig.Interval = config.Interval
-	}
 	if config.LogPath != "" {
 		newConfig.LogPath = config.LogPath
 	}

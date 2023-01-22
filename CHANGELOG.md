@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Repo file format
+- Removed CLI version
 
 ## [0.1.2] - 2023-01-18
 ### Added

@@ -13,7 +13,6 @@ const confPath = "/data/gans/config.yaml"
 const logPath = "/data/gans/gans.log"
 const dbPath = ""
 const yamlPath = ""
-const interval = ""
 
 func main() {
 	var conf models.Conf
@@ -22,7 +21,6 @@ func main() {
 	confPtr := flag.String("c", confPath, "Path to config yaml file")
 	logPtr := flag.String("l", logPath, "Path to log file")
 	yamlPtr := flag.String("r", yamlPath, "Path to repo yaml file")
-	timePtr := flag.String("t", interval, "Interval between repo scans (s, m, h)")
 	flag.Parse()
 
 	check.Path(*logPtr)
@@ -31,7 +29,6 @@ func main() {
 	conf.ConfPath = *confPtr
 	conf.DB = *dbPtr
 	conf.YamlPath = *yamlPtr
-	conf.Interval = *timePtr
 	conf.LogPath = *logPtr
 
 	check.Path(conf.ConfPath)
