@@ -61,4 +61,5 @@ type GuiData struct {
 	Themes []string
 	Len    int
 	Keys   []Key
+	File   string
 }

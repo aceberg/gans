@@ -7,31 +7,21 @@
             <table class="table table-striped">
                 <tr>
                     <th>Playbook</th>
+                    <th>Hosts or groups</th>
                     <th>Run for all hosts</th>
-                    <th>Run for one host or group</th>
                 </tr>
                 {{ range .Keys }}
                 <tr>
                     <td>
-                        <a href="/filter?by=file&tag={{ .Name }}">{{ .Name }}</a>
+                        <a href="/show?file={{ .Name }}">{{ .Name }}</a>
+                    </td>
+                    <td>
+                        {{ .State }}
                     </td>
                     <td>
                         <a href="/run?file={{ .Name }}">
-                            <button type="submit" class="btn btn-primary btn-sm">Run</button>
+                            <i class="bi bi-caret-right-square"></i>
                         </a>
-                    </td>
-                    <td>
-                    <form action="/run_group/" method="post" class="input-group">
-                        <input name="file" value="{{ .Name }}" type="hidden">
-                        <select name="group" class="form-select form-select-sm">
-                            {{ range $.Themes }}
-                            <option value="{{ . }}">
-                                {{ . }}
-                            </option>
-                            {{ end }}
-                        </select>
-                        <button type="submit" class="btn btn-primary btn-sm">Run</button>
-                    </form>
                     </td>
                 </tr>
                 {{ end }}

@@ -1,0 +1,33 @@
+{{ define "show" }}
+
+<body>
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <form action="/run_group/" method="post" class="input-group">
+                <input name="file" value="{{ .File }}" type="hidden">
+                <select name="group" class="form-select form-select">
+                    {{ range .Keys }}
+                    <option value="{{ .Name }}">
+                        {{ .Name }}
+                    </option>
+                    {{ end }}
+                </select>
+                <button type="submit" class="btn btn-primary btn">Run</button>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        {{ range .Themes }}
+        <pre><code>
+            <p>{{ . }}</p>
+        </code></pre>
+        {{ end }}
+    <br>
+    </div>
+    </div>
+        
+
+{{ template "footer" }}
+{{ end }}
