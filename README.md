@@ -20,7 +20,7 @@ Git+Ansible: watch git repo for changes and run only changed playbooks
 ![Screenshot](https://raw.githubusercontent.com/aceberg/gans/main/assets/Screenshot%202023-01-23%20at%2019-34-01%20gans.png)
 
 ## Quick start
-Don't forget to mount your git directory!
+Make sure `/path/to/git/repo` leads to your Ansible git repo.
 
 ```sh
 docker run --name gans \
@@ -30,13 +30,17 @@ docker run --name gans \
 -p 8845:8845 \
 aceberg/gans
 ```
+Or use [docker-compose.yml](docker-compose.yml)
+
 ## Usage
 
 Web interface is pretty self-explanatory. If you know Ansible, you shouldn't have any problems.    
 Important things about `gans`:
 - It supports only local git repos for now. If you need to work with remote repo, you can pull it regularly with [git-syr](https://github.com/aceberg/git-syr) or your own cron script. 
 - I decided not to parse Ansible Inventory to reduce errors, so you need to enter hosts and groups manually on `Repo` page. `Gans` will work only with those hosts.
-- Keys are handled by Ansible Inventory or `ansible.cfg`. `Keys` page is only there to help you upload them and check their presence.
+- SSH Keys are handled by Ansible Inventory or `ansible.cfg`. `Keys` page is only there to help you upload them and check their presence.   
+
+Example [ansible.cfg](examples/ansible.cfg) and [hosts.ini](examples/hosts.ini) can also help. To work correctly `ansible.cfg` shoul be at the `/` of git repo.
 
 ## Config
 
