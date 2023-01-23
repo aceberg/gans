@@ -2,6 +2,7 @@
 
 ## ToDo
 - [ ] Use Repo timeout for playbook repeat (?)
+- [ ] Notifications on failure
 
 ## Done
 - [x] Execute Ansible playbook for 1 host

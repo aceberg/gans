@@ -6,7 +6,8 @@ services:
     ports:
     - 8845:8845
     volumes:
-    - ~/.dockerdata/gans:/data/gans
+    - ~/.dockerdata/gans:/data/gans       # app data
+    - /path/to/git/repo:/gitrepo          # path to ansible git repo
     environment:
       TZ: Asia/Novosibirsk                # required: needs your TZ for correct time
       DB: "/data/gans/sqlite.db"          # optional, default: /data/gans/sqlite.db
