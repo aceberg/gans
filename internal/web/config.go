@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/conf"
 	"github.com/aceberg/gans/internal/db"
 	"github.com/aceberg/gans/internal/models"
@@ -16,6 +17,12 @@ func configHandler(w http.ResponseWriter, r *http.Request) {
 
 	guiData.Config = AppConfig
 	guiData.Icon = Icon
+
+	file, err := TemplHTML.ReadFile(TemplPath + "version")
+	check.IfError(err)
+
+	version := string(file)
+	guiData.File = version[8:]
 
 	guiData.Themes = []string{"cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "morph", "pulse", "quartz", "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "vapor", "yeti", "zephyr"}
 
@@ -31,6 +38,7 @@ func saveConfigHandler(w http.ResponseWriter, r *http.Request) {
 	AppConfig.Show = r.FormValue("show")
 	AppConfig.YamlPath = r.FormValue("yamlpath")
 	AppConfig.KeyPath = r.FormValue("keypath")
+	AppConfig.LogPath = r.FormValue("logpath")
 	AppConfig.Interval = r.FormValue("interval")
 
 	close(AppConfig.Quit)

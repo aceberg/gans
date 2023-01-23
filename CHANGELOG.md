@@ -2,7 +2,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.2.1] - 2023-01-22
+## [0.2.2] - 2023-01-23
+### Added
+- Show playbooks
+- Show inventory
+- Config option `Log Path`
+- Version on config page
+
+## [0.2.1] - 2023-01-21
 ### Added
 - Run only for hosts in playbook
 - Display Log page

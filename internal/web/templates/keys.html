@@ -1,6 +1,8 @@
 {{ define "keys"}}
 <body>
     <div class="container mt-3">
+    <div class="row">
+        <div class="col">
         <table class="table">
             <form action="/new_key/" enctype="multipart/form-data" method="post">
                 <tr>
@@ -19,6 +21,15 @@
                 </tr>
             </form>
         </table>
+        </div>
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                <p>This page is only to upload keys and check their presence.</p>
+                <p>Please, manage keys and hosts in ansible inventory or <b>ansible.cfg</b> file in your repo.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <table class="table table-striped">
             <tr>
                 <th>Del</th>
@@ -51,6 +62,7 @@
             </tr>
             {{ end}}
         </table>
+    </div>
     </div>
 
 {{ template "footer" }}

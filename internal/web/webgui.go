@@ -7,6 +7,7 @@ import (
 	"github.com/aceberg/gans/internal/check"
 	"github.com/aceberg/gans/internal/conf"
 	"github.com/aceberg/gans/internal/db"
+	"github.com/aceberg/gans/internal/logfile"
 	"github.com/aceberg/gans/internal/models"
 	"github.com/aceberg/gans/internal/play"
 	"github.com/aceberg/gans/internal/yaml"
@@ -15,6 +16,8 @@ import (
 // Gui - start web server
 func Gui(config models.Conf) {
 	AppConfig = mergeConfig(config)
+
+	go logfile.Output(AppConfig.LogPath)
 
 	log.Println("INFO: starting web gui with", AppConfig.ConfPath)
 

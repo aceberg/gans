@@ -18,6 +18,7 @@ func Get(path string) models.Conf {
 	viper.SetDefault("SHOW", "25")
 	viper.SetDefault("YAMLPATH", "/data/gans/repo.yaml")
 	viper.SetDefault("KEYPATH", "/data/gans/ssh")
+	viper.SetDefault("LOGPATH", "/data/gans/gans.log")
 	viper.SetDefault("INTERVAL", "5s")
 
 	viper.SetConfigFile(path)
@@ -33,6 +34,7 @@ func Get(path string) models.Conf {
 	config.Theme, _ = viper.Get("THEME").(string)
 	config.Show, _ = viper.Get("SHOW").(string)
 	config.KeyPath, _ = viper.Get("KEYPATH").(string)
+	config.LogPath, _ = viper.Get("LOGPATH").(string)
 	config.YamlPath, _ = viper.Get("YAMLPATH").(string)
 	config.Interval, _ = viper.Get("INTERVAL").(string)
 
@@ -51,6 +53,7 @@ func Write(config models.Conf) {
 	viper.Set("theme", config.Theme)
 	viper.Set("show", config.Show)
 	viper.Set("keypath", config.KeyPath)
+	viper.Set("logpath", config.LogPath)
 	viper.Set("yamlpath", config.YamlPath)
 	viper.Set("interval", config.Interval)
 

@@ -2,6 +2,7 @@
 
 <body>
     <div class="container mt-5">
+    {{ if ne .File .Repo.Inv }}
     <div class="row">
         <div class="col">
             <form action="/run_group/" method="post" class="input-group">
@@ -13,11 +14,12 @@
                     </option>
                     {{ end }}
                 </select>
-                <button type="submit" class="btn btn-primary btn">Run</button>
+                <button type="submit" class="btn btn-primary btn">Run for host or group</button>
             </form>
         </div>
         <div class="col"></div>
     </div>
+    {{ end }}
     <div class="row">
         {{ range .Themes }}
         <pre><code>

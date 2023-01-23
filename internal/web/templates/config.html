@@ -40,6 +40,10 @@
                     <td><input name="keypath" type="text" class="form-control" value="{{ .Config.KeyPath }}"></td>
                 </tr>
                 <tr>
+                    <td>Log Path</td>
+                    <td><input name="logpath" type="text" class="form-control" value="{{ .Config.LogPath }}"></td>
+                </tr>
+                <tr>
                     <td>Interval</td>
                     <td><input name="interval" type="text" class="form-control" value="{{ .Config.Interval }}"></td>
                 </tr>
@@ -52,10 +56,14 @@
         </div>
         <div class="col">
             <div class="alert alert-info" role="alert">
-                <p>● After changing <b>DB Path</b>, <b>Host</b>, <b>Port</b> or <b>Yaml Path</b> you need to restart the app</p>
+                <p>Current version: {{ .File }}</p>
+            </div>
+            <div class="alert alert-info" role="alert">
+                <p>● After changing <b>DB Path</b>, <b>Host</b>, <b>Port</b>, <b>Log Path</b> or <b>Yaml Path</b> you need to restart the app</p>
                 <p>● <b>Show</b> - how many lines to show on index and log page</p>
                 <p>● <b>Yaml Path</b> - path to `repo.yaml` or other file, where git repo is described</p>
                 <p>● <b>Key Path</b> - path to ssh keys directory</p>
+                <p>● <b>Log Path</b> - path to log file</p>
                 <p>● <b>Interval</b> - interval between repo scans (s, m, h)</p>
             </div>
             <br>

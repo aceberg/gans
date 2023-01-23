@@ -19,11 +19,22 @@
                     <td><input name="inv" type="text" class="form-control" value="{{ .Repo.Inv }}"></td>
                 </tr>
                 <tr>
-                    <td><button type="submit" class="btn btn-primary">Save</button></td>
-                    <td></td>
+                    <td><button type="submit" class="btn btn-primary">Save</button>
+                    </form></td>
+                    <td>
+                        <a href="/show?file={{ .Repo.Inv }}">
+                            <button class="btn btn-primary">Show inventory</button>
+                        </a>
+                    </td>
                 </tr>
-            </form>
         </table>
+        </div>
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                <p>● <b>Path</b> - path to git repo directory</p>
+                <p>● <b>Head</b> - head of last commit. You can leave it empty on the first start</p>
+                <p>● <b>Inventory</b> - name of inventory file</p>
+            </div>
         </div>
     </div>
     <div class="row">
